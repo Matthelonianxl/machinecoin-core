@@ -1,5 +1,5 @@
-﻿Win32, Linux, MacOSX and source releases for machinecoin v0.3.23 have been uploaded to
-https://sourceforge.net/projects/machinecoin/files/Machinecoin/machinecoin-0.3.23/
+Win32, Linux, MacOSX and source releases for machinecoin v0.3.23 have been uploaded to
+https://sourceforge.net/projects/machinecoin/files/machinecoin-project/machinecoin-core-0.3.23/
 
 This is another quick bugfix release, trying to deal with the influx of new machinecoin users.
 

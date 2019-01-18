@@ -1,4 +1,4 @@
-﻿# Valgrind suppressions file for Machinecoin.
+# Valgrind suppressions file for Machinecoin.
 #
 # Includes known Valgrind warnings in our dependencies that cannot be fixed
 # in-tree.

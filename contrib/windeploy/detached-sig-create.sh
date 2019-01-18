@@ -1,8 +1,9 @@
-﻿#!/bin/sh
+#!/bin/sh
 # Copyright (c) 2014-2015 The Machinecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+export LC_ALL=C
 if [ -z "$OSSLSIGNCODE" ]; then
   OSSLSIGNCODE=osslsigncode
 fi

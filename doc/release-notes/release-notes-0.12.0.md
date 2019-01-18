@@ -1,12 +1,12 @@
-﻿Machinecoin Core version 0.12.0 is now available from:
+Machinecoin Core version 0.12.0 is now available from:
 
-  <https://machinecoin.org/bin/machinecoin-core-0.12.0/>
+  <https://machinecoin.io/bin/machinecoin-core-0.12.0/>
 
 This is a new major version release, bringing new features and other improvements.
 
 Please report bugs using the issue tracker at github:
 
-  <https://github.com/machinecoin/machinecoin/issues>
+  <https://github.com/machinecoin-project/machinecoin-core/issues>
 
 Upgrading and downgrading
 =========================
@@ -331,7 +331,7 @@ practice. In future releases, a higher value may also help the network
 as a whole: stored blocks could be served to other nodes.
 
 For further information about pruning, you may also consult the [release
-notes of v0.11.0](https://github.com/machinecoin/machinecoin/blob/v0.11.0/doc/release-notes.md#block-file-pruning).
+notes of v0.11.0](https://github.com/machinecoin-project/machinecoin-core/blob/v0.11.0/doc/release-notes.md#block-file-pruning).
 
 `NODE_BLOOM` service bit
 ------------------------
@@ -623,7 +623,7 @@ git merge commit are mentioned.
 ### Validation
 
 - #5927 `8d9f0a6` Reduce checkpoints' effect on consensus. (Pieter Wuille)
-- #6299 `24f2489` Bugfix: Don't check the genesis block header before accepting it (Jorge Timón)
+- #6299 `24f2489` Bugfix: Don't check the genesis block header before accepting it (Jorge Tim??n)
 - #6361 `d7ada03` Use real number of cores for default -par, ignore virtual cores (Wladimir J. van der Laan)
 - #6519 `87f37e2` Make logging for validation optional (Wladimir J. van der Laan)
 - #6351 `2a1090d` CHECKLOCKTIMEVERIFY (BIP65) IsSuperMajority() soft-fork (Peter Todd)
@@ -761,8 +761,8 @@ git merge commit are mentioned.
 ### Miscellaneous
 
 - #6213 `e54ff2f` [init] add -blockversion help and extend -upnp help (Diapolo)
-- #5975 `1fea667` Consensus: Decouple ContextualCheckBlockHeader from checkpoints (Jorge Timón)
-- #6061 `eba2f06` Separate Consensus::CheckTxInputs and GetSpendHeight in CheckInputs (Jorge Timón)
+- #5975 `1fea667` Consensus: Decouple ContextualCheckBlockHeader from checkpoints (Jorge Tim??n)
+- #6061 `eba2f06` Separate Consensus::CheckTxInputs and GetSpendHeight in CheckInputs (Jorge Tim??n)
 - #5994 `786ed11` detach wallet from miner (Jonas Schnelli)
 - #6387 `11576a5` [machinecoin-cli] improve error output (Jonas Schnelli)
 - #6401 `6db53b4` Add MACHINECOIND_SIGTERM_TIMEOUT to OpenRC init scripts (Florian Schmaus)
@@ -779,7 +779,7 @@ git merge commit are mentioned.
 - #6565 `a6f2aff` Make sure we re-acquire lock if a task throws (Casey Rodarmor)
 - #6599 `f4d88c4` Make sure LogPrint strings are line-terminated (Ross Nicoll)
 - #6630 `195942d` Replace boost::reverse_lock with our own (Casey Rodarmor)
-- #6103 `13b8282` Add ZeroMQ notifications (João Barbosa)
+- #6103 `13b8282` Add ZeroMQ notifications (Jo??o Barbosa)
 - #6692 `d5d1d2e` devtools: don't push if signing fails in github-merge (Wladimir J. van der Laan)
 - #6728 `2b0567b` timedata: Prevent warning overkill (Wladimir J. van der Laan)
 - #6713 `f6ce59c` SanitizeString: Allow hypen char (MarcoFalke)
@@ -839,8 +839,8 @@ Thanks to everyone who directly contributed to this release:
 - Johnathan Corgan
 - Jonas Schnelli
 - Jonathan Cross
-- João Barbosa
-- Jorge Timón
+- Jo??o Barbosa
+- Jorge Tim??n
 - Josh Lehan
 - J Ross Nicoll
 - kazcw
@@ -864,7 +864,7 @@ Thanks to everyone who directly contributed to this release:
 - Patrick Strateman
 - Paul Georgiou
 - Paul Rabahy
-- Pavel Janík / paveljanik
+- Pavel Jan??k / paveljanik
 - Pavel Vasin
 - Pavol Rusnak
 - Peter Josling

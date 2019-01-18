@@ -1,4 +1,4 @@
-﻿#!/sbin/openrc-run
+#!/sbin/openrc-run
 
 # backward compatibility for existing gentoo layout 
 #
@@ -8,7 +8,7 @@ else
 	MACHINECOIND_DEFAULT_DATADIR="/var/lib/machinecoind"
 fi
 
-MACHINECOIND_CONFIGFILE=${MACHINECOIND_CONFIGFILE:-/etc/machinecoin/machinecoin.conf}
+MACHINECOIND_CONFIGFILE=${MACHINECOIND_CONFIGFILE:-/etc/machinecoin-project/machinecoin-core.conf}
 MACHINECOIND_PIDDIR=${MACHINECOIND_PIDDIR:-/var/run/machinecoind}
 MACHINECOIND_PIDFILE=${MACHINECOIND_PIDFILE:-${MACHINECOIND_PIDDIR}/machinecoind.pid}
 MACHINECOIND_DATADIR=${MACHINECOIND_DATADIR:-${MACHINECOIND_DEFAULT_DATADIR}}

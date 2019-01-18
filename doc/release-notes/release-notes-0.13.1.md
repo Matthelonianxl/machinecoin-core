@@ -1,6 +1,6 @@
-﻿Machinecoin Core version 0.13.1 is now available from:
+Machinecoin Core version 0.13.1 is now available from:
 
-  <https://machinecoin.org/bin/machinecoin-core-0.13.1/>
+  <https://machinecoin.io/bin/machinecoin-core-0.13.1/>
 
 This is a new minor version release, including activation parameters for the
 segwit softfork, various bugfixes and performance improvements, as well as
@@ -8,7 +8,7 @@ updated translations.
 
 Please report bugs using the issue tracker at github:
 
-  <https://github.com/machinecoin/machinecoin/issues>
+  <https://github.com/machinecoin-project/machinecoin-core/issues>
 
 To receive security and update notifications, please subscribe to:
 
@@ -23,7 +23,7 @@ updates will be released anymore. Without security updates, using a machinecoin
 wallet on a XP machine is irresponsible at least.
 
 In addition to that, with 0.12.x there have been varied reports of Machinecoin Core
-randomly crashing on Windows XP. It is [not clear](https://github.com/machinecoin/machinecoin/issues/7681#issuecomment-217439891)
+randomly crashing on Windows XP. It is [not clear](https://github.com/machinecoin-project/machinecoin-core/issues/7681#issuecomment-217439891)
 what the source of these crashes is, but it is likely that upstream
 libraries such as Qt are no longer being tested on XP.
 
@@ -365,7 +365,7 @@ Thanks to everyone who directly contributed to this release:
 
 - adlawren
 - Alexey Vesnin
-- Anders Øyvind Urke-Sætre
+- Anders ??yvind Urke-S??tre
 - Andrew Chow
 - Anthony Towns
 - BtcDrak
@@ -399,7 +399,7 @@ Thanks to everyone who directly contributed to this release:
 - Micha
 - Michael Ford
 - mruddy
-- Pavel Janík
+- Pavel Jan??k
 - Pieter Wuille
 - rodasmith
 - Sev

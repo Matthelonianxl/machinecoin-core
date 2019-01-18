@@ -1,7 +1,7 @@
-﻿# /etc/conf.d/machinecoind: config file for /etc/init.d/machinecoind
+# /etc/conf.d/machinecoind: config file for /etc/init.d/machinecoind
 
 # Config file location
-#MACHINECOIND_CONFIGFILE="/etc/machinecoin/machinecoin.conf"
+#MACHINECOIND_CONFIGFILE="/etc/machinecoin-project/machinecoin-core.conf"
 
 # What directory to write pidfile to?  (created and owned by $MACHINECOIND_USER)
 #MACHINECOIND_PIDDIR="/var/run/machinecoind"

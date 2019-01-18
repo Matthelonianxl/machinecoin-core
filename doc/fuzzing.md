@@ -1,4 +1,4 @@
-﻿Fuzz-testing Machinecoin Core
+Fuzz-testing Machinecoin Core
 ==========================
 
 A special test harness `test_machinecoin_fuzzy` is provided to provide an easy
@@ -55,7 +55,7 @@ AFLOUT=$PWD/outputs
 
 Example inputs are available from:
 
-- https://download.visucore.com/machinecoin/machinecoin_fuzzy_in.tar.xz
+- https://download.visucore.com/machinecoin-project/machinecoin-core_fuzzy_in.tar.xz
 - http://strateman.ninja/fuzzing.tar.xz
 
 Extract these (or other starting inputs) into the `inputs` directory before starting fuzzing.

@@ -1,6 +1,6 @@
-﻿Machinecoin Core version 0.9.2 is now available from:
+Machinecoin Core version 0.9.2 is now available from:
 
-  https://machinecoin.org/bin/0.9.2/
+  https://machinecoin.io/bin/0.9.2/
 
 This is a new minor version release, bringing mostly bug fixes and some minor
 improvements. OpenSSL has been updated because of a security issue (CVE-2014-0224).
@@ -8,7 +8,7 @@ Upgrading to this release is recommended.
 
 Please report bugs using the issue tracker at github:
 
-  https://github.com/machinecoin/machinecoin/issues
+  https://github.com/machinecoin-project/machinecoin-core/issues
 
 How to Upgrade
 --------------

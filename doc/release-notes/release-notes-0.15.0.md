@@ -1,13 +1,13 @@
-﻿Machinecoin Core version *0.15.0* is now available from:
+Machinecoin Core version *0.15.0* is now available from:
 
-  <https://machinecoin.org/bin/machinecoin-core-0.15.0/>
+  <https://machinecoin.io/bin/machinecoin-core-0.15.0/>
 
 This is a new major version release, including new features, various bugfixes
 and performance improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at GitHub:
 
-  <https://github.com/machinecoin/machinecoin/issues>
+  <https://github.com/machinecoin-project/machinecoin-core/issues>
 
 To receive security and update notifications, please subscribe to:
 
@@ -85,7 +85,7 @@ Version 0.15 contains a number of significant performance improvements, which ma
 Initial Block Download, startup, transaction and block validation much faster:
 
 - The chainstate database (which is used for tracking UTXOs) has been changed
-  from a per-transaction model to a per-output model (See [PR 10195](https://github.com/machinecoin/machinecoin/pull/10195)). Advantages of this model
+  from a per-transaction model to a per-output model (See [PR 10195](https://github.com/machinecoin-project/machinecoin-core/pull/10195)). Advantages of this model
   are that it:
     - avoids the CPU overhead of deserializing and serializing the unused outputs;
     - has more predictable memory usage;
@@ -98,32 +98,32 @@ Initial Block Download, startup, transaction and block validation much faster:
   a few extra gigabytes may be used.
 - Earlier versions experienced a spike in memory usage while flushing UTXO updates to disk.
   As a result, only half of the available memory was actually used as cache, and the other half was
-  reserved to accommodate flushing. This is no longer the case (See [PR 10148](https://github.com/machinecoin/machinecoin/pull/10148)), and the entirety of
+  reserved to accommodate flushing. This is no longer the case (See [PR 10148](https://github.com/machinecoin-project/machinecoin-core/pull/10148)), and the entirety of
   the available cache (see `-dbcache`) is now actually used as cache. This reduces the flushing
   frequency by a factor 2 or more.
 - In previous versions, signature validation for transactions has been cached when the
   transaction is accepted to the mempool. Version 0.15 extends this to cache the entire script
-  validity (See [PR 10192](https://github.com/machinecoin/machinecoin/pull/10192)). This means that if a transaction in a block has already been accepted to the
+  validity (See [PR 10192](https://github.com/machinecoin-project/machinecoin-core/pull/10192)). This means that if a transaction in a block has already been accepted to the
   mempool, the scriptSig does not need to be re-evaluated. Empirical tests show that
   this results in new block validation being 40-50% faster.
-- LevelDB has been upgraded to version 1.20 (See [PR 10544](https://github.com/machinecoin/machinecoin/pull/10544)). This version contains hardware acceleration for CRC
+- LevelDB has been upgraded to version 1.20 (See [PR 10544](https://github.com/machinecoin-project/machinecoin-core/pull/10544)). This version contains hardware acceleration for CRC
   on architectures supporting SSE 4.2. As a result, synchronization and block validation are now faster.
-- SHA256 hashing has been optimized for architectures supporting SSE 4 (See [PR 10821](https://github.com/machinecoin/machinecoin/pull/10821)). SHA256 is around
+- SHA256 hashing has been optimized for architectures supporting SSE 4 (See [PR 10821](https://github.com/machinecoin-project/machinecoin-core/pull/10821)). SHA256 is around
   50% faster on supported hardware, which results in around 5% faster IBD and block
   validation. In version 0.15, SHA256 hardware optimization is disabled in release builds by
   default, but can be enabled by using `--enable-experimental-asm` when building.
-- Refill of the keypool no longer flushes the wallet between each key which resulted in a ~20x speedup in creating a new wallet. Part of this speedup was used to increase the default keypool to 1000 keys to make recovery more robust. (See [PR 10831](https://github.com/machinecoin/machinecoin/pull/10831)).
+- Refill of the keypool no longer flushes the wallet between each key which resulted in a ~20x speedup in creating a new wallet. Part of this speedup was used to increase the default keypool to 1000 keys to make recovery more robust. (See [PR 10831](https://github.com/machinecoin-project/machinecoin-core/pull/10831)).
 
 Fee Estimation Improvements
 ---------------------------
 
-Fee estimation has been significantly improved in version 0.15, with more accurate fee estimates used by the wallet and a wider range of options for advanced users of the `estimatesmartfee` and `estimaterawfee` RPCs (See [PR 10199](https://github.com/machinecoin/machinecoin/pull/10199)).
+Fee estimation has been significantly improved in version 0.15, with more accurate fee estimates used by the wallet and a wider range of options for advanced users of the `estimatesmartfee` and `estimaterawfee` RPCs (See [PR 10199](https://github.com/machinecoin-project/machinecoin-core/pull/10199)).
 
 ### Changes to internal logic and wallet behavior
 
 - Internally, estimates are now tracked on 3 different time horizons. This allows for longer targets and means estimates adjust more quickly to changes in conditions.
 - Estimates can now be *conservative* or *economical*. *Conservative* estimates use longer time horizons to produce an estimate which is less susceptible to rapid changes in fee conditions. *Economical* estimates use shorter time horizons and will be more affected by short-term changes in fee conditions. Economical estimates may be considerably lower during periods of low transaction activity (for example over weekends), but may result in transactions being unconfirmed if prevailing fees increase rapidly.
-- By default, the wallet will use conservative fee estimates to increase the reliability of transactions being confirmed within the desired target. For transactions that are marked as replaceable, the wallet will use an economical estimate by default, since the fee can be 'bumped' if the fee conditions change rapidly (See [PR 10589](https://github.com/machinecoin/machinecoin/pull/10589)).
+- By default, the wallet will use conservative fee estimates to increase the reliability of transactions being confirmed within the desired target. For transactions that are marked as replaceable, the wallet will use an economical estimate by default, since the fee can be 'bumped' if the fee conditions change rapidly (See [PR 10589](https://github.com/machinecoin-project/machinecoin-core/pull/10589)).
 - Estimates can now be made for confirmation targets up to 1008 blocks (one week).
 - More data on historical fee rates is stored, leading to more precise fee estimates.
 - Transactions which leave the mempool due to eviction or other non-confirmed reasons are now taken into account by the fee estimation logic, leading to more accurate fee estimates.
@@ -132,7 +132,7 @@ Fee estimation has been significantly improved in version 0.15, with more accura
 ### Changes to fee estimate RPCs
 
 - The `estimatefee` RPC is now deprecated in favor of using only `estimatesmartfee` (which is the implementation used by the GUI)
-- The `estimatesmartfee` RPC interface has been changed (See [PR 10707](https://github.com/machinecoin/machinecoin/pull/10707)):
+- The `estimatesmartfee` RPC interface has been changed (See [PR 10707](https://github.com/machinecoin-project/machinecoin-core/pull/10707)):
     - The `nblocks` argument has been renamed to `conf_target` (to be consistent with other RPC methods).
     - An `estimate_mode` argument has been added. This argument takes one of the following strings: `CONSERVATIVE`, `ECONOMICAL` or `UNSET` (which defaults to `CONSERVATIVE`).
     - The RPC return object now contains an `errors` member, which returns errors encountered during processing.
@@ -142,7 +142,7 @@ Fee estimation has been significantly improved in version 0.15, with more accura
 Multi-wallet support
 --------------------
 
-Machinecoin Core now supports loading multiple, separate wallets (See [PR 8694](https://github.com/machinecoin/machinecoin/pull/8694), [PR 10849](https://github.com/machinecoin/machinecoin/pull/10849)). The wallets are completely separated, with individual balances, keys and received transactions.
+Machinecoin Core now supports loading multiple, separate wallets (See [PR 8694](https://github.com/machinecoin-project/machinecoin-core/pull/8694), [PR 10849](https://github.com/machinecoin-project/machinecoin-core/pull/10849)). The wallets are completely separated, with individual balances, keys and received transactions.
 
 Multi-wallet is enabled by using more than one `-wallet` argument when starting Machinecoin, either on the command line or in the Machinecoin config file.
 
@@ -166,12 +166,12 @@ replace unconfirmed opt-in RBF transactions with a new transaction that pays
 a higher fee.
 
 In version 0.15, creating an opt-in RBF transaction and replacing the unconfirmed
-transaction with a higher-fee transaction are both supported in the GUI (See [PR 9592](https://github.com/machinecoin/machinecoin/pull/9592)).
+transaction with a higher-fee transaction are both supported in the GUI (See [PR 9592](https://github.com/machinecoin-project/machinecoin-core/pull/9592)).
 
 Removal of Coin Age Priority
 ----------------------------
 
-In previous versions of Machinecoin Core, a portion of each block could be reserved for transactions based on the age and value of UTXOs they spent. This concept (Coin Age Priority) is a policy choice by miners, and there are no consensus rules around the inclusion of Coin Age Priority transactions in blocks. In practice, only a few miners continue to use Coin Age Priority for transaction selection in blocks. Machinecoin Core 0.15 removes all remaining support for Coin Age Priority (See [PR 9602](https://github.com/machinecoin/machinecoin/pull/9602)). This has the following implications:
+In previous versions of Machinecoin Core, a portion of each block could be reserved for transactions based on the age and value of UTXOs they spent. This concept (Coin Age Priority) is a policy choice by miners, and there are no consensus rules around the inclusion of Coin Age Priority transactions in blocks. In practice, only a few miners continue to use Coin Age Priority for transaction selection in blocks. Machinecoin Core 0.15 removes all remaining support for Coin Age Priority (See [PR 9602](https://github.com/machinecoin-project/machinecoin-core/pull/9602)). This has the following implications:
 
 - The concept of *free transactions* has been removed. High Coin Age Priority transactions would previously be allowed to be relayed even if they didn't attach a miner fee. This is no longer possible since there is no concept of Coin Age Priority. The `-limitfreerelay` and `-relaypriority` options which controlled relay of free transactions have therefore been removed.
 - The `-sendfreetransactions` option has been removed, since almost all miners do not include transactions which do not attach a transaction fee.
@@ -185,21 +185,21 @@ In previous versions of Machinecoin Core, a portion of each block could be reser
 Mempool Persistence Across Restarts
 -----------------------------------
 
-Version 0.14 introduced mempool persistence across restarts (the mempool is saved to a `mempool.dat` file in the data directory prior to shutdown and restores the mempool when the node is restarted). Version 0.15 allows this feature to be switched on or off using the `-persistmempool` command-line option (See [PR 9966](https://github.com/machinecoin/machinecoin/pull/9966)). By default, the option is set to true, and the mempool is saved on shutdown and reloaded on startup. If set to false, the `mempool.dat` file will not be loaded on startup or saved on shutdown.
+Version 0.14 introduced mempool persistence across restarts (the mempool is saved to a `mempool.dat` file in the data directory prior to shutdown and restores the mempool when the node is restarted). Version 0.15 allows this feature to be switched on or off using the `-persistmempool` command-line option (See [PR 9966](https://github.com/machinecoin-project/machinecoin-core/pull/9966)). By default, the option is set to true, and the mempool is saved on shutdown and reloaded on startup. If set to false, the `mempool.dat` file will not be loaded on startup or saved on shutdown.
 
 New RPC methods
 ---------------
 
 Version 0.15 introduces several new RPC methods:
 
-- `abortrescan` stops current wallet rescan, e.g. when triggered by an `importprivkey` call (See [PR 10208](https://github.com/machinecoin/machinecoin/pull/10208)).
-- `combinerawtransaction` accepts a JSON array of raw transactions and combines them into a single raw transaction (See [PR 10571](https://github.com/machinecoin/machinecoin/pull/10571)).
+- `abortrescan` stops current wallet rescan, e.g. when triggered by an `importprivkey` call (See [PR 10208](https://github.com/machinecoin-project/machinecoin-core/pull/10208)).
+- `combinerawtransaction` accepts a JSON array of raw transactions and combines them into a single raw transaction (See [PR 10571](https://github.com/machinecoin-project/machinecoin-core/pull/10571)).
 - `estimaterawfee` returns raw fee data so that customized logic can be implemented to analyze the data and calculate estimates. See [Fee Estimation Improvements](#fee-estimation-improvements) for full details on changes to the fee estimation logic and interface.
 - `getchaintxstats` returns statistics about the total number and rate of transactions
-  in the chain (See [PR 9733](https://github.com/machinecoin/machinecoin/pull/9733)).
+  in the chain (See [PR 9733](https://github.com/machinecoin-project/machinecoin-core/pull/9733)).
 - `listwallets` lists wallets which are currently loaded. See the *Multi-wallet* section
   of these release notes for full details (See [Multi-wallet support](#multi-wallet-support)).
-- `uptime` returns the total runtime of the `machinecoind` server since its last start (See [PR 10400](https://github.com/machinecoin/machinecoin/pull/10400)).
+- `uptime` returns the total runtime of the `machinecoind` server since its last start (See [PR 10400](https://github.com/machinecoin-project/machinecoin-core/pull/10400)).
 
 Low-level RPC changes
 ---------------------
@@ -222,15 +222,15 @@ Low-level RPC changes
   `bytes_serialized`. The first is a more accurate estimate of actual disk usage, but
   is not deterministic. The second is unrelated to disk usage, but is a
   database-independent metric of UTXO set size: it counts every UTXO entry as 50 + the
-  length of its scriptPubKey (See [PR 10426](https://github.com/machinecoin/machinecoin/pull/10426)).
+  length of its scriptPubKey (See [PR 10426](https://github.com/machinecoin-project/machinecoin-core/pull/10426)).
 
-- `signrawtransaction` can no longer be used to combine multiple transactions into a single transaction. Instead, use the new `combinerawtransaction` RPC (See [PR 10571](https://github.com/machinecoin/machinecoin/pull/10571)).
+- `signrawtransaction` can no longer be used to combine multiple transactions into a single transaction. Instead, use the new `combinerawtransaction` RPC (See [PR 10571](https://github.com/machinecoin-project/machinecoin-core/pull/10571)).
 
-- `fundrawtransaction` no longer accepts a `reserveChangeKey` option. This option used to allow RPC users to fund a raw transaction using an key from the keypool for the change address without removing it from the available keys in the keypool. The key could then be re-used for a `getnewaddress` call, which could potentially result in confusing or dangerous behaviour (See [PR 10784](https://github.com/machinecoin/machinecoin/pull/10784)).
+- `fundrawtransaction` no longer accepts a `reserveChangeKey` option. This option used to allow RPC users to fund a raw transaction using an key from the keypool for the change address without removing it from the available keys in the keypool. The key could then be re-used for a `getnewaddress` call, which could potentially result in confusing or dangerous behaviour (See [PR 10784](https://github.com/machinecoin-project/machinecoin-core/pull/10784)).
 
 - `estimatepriority` and `estimatesmartpriority` have been removed. See [Removal of Coin Age Priority](#removal-of-coin-age-priority).
 
-- The `listunspent` RPC now takes a `query_options` argument (see [PR 8952](https://github.com/machinecoin/machinecoin/pull/8952)), which is a JSON object
+- The `listunspent` RPC now takes a `query_options` argument (see [PR 8952](https://github.com/machinecoin-project/machinecoin-core/pull/8952)), which is a JSON object
   containing one or more of the following members:
   - `minimumAmount` - a number specifying the minimum value of each UTXO
   - `maximumAmount` - a number specifying the maximum value of each UTXO
@@ -240,22 +240,22 @@ Low-level RPC changes
 - The `getmempoolancestors`, `getmempooldescendants`, `getmempoolentry` and `getrawmempool` RPCs no longer return `startingpriority` and `currentpriority`. See [Removal of Coin Age Priority](#removal-of-coin-age-priority).
 
 - The `dumpwallet` RPC now returns the full absolute path to the dumped wallet. It
-  used to return no value, even if successful (See [PR 9740](https://github.com/machinecoin/machinecoin/pull/9740)).
+  used to return no value, even if successful (See [PR 9740](https://github.com/machinecoin-project/machinecoin-core/pull/9740)).
 
-- In the `getpeerinfo` RPC, the return object for each peer now returns an `addrbind` member, which contains the ip address and port of the connection to the peer. This is in addition to the `addrlocal` member which contains the ip address and port of the local node as reported by the peer (See [PR 10478](https://github.com/machinecoin/machinecoin/pull/10478)).
+- In the `getpeerinfo` RPC, the return object for each peer now returns an `addrbind` member, which contains the ip address and port of the connection to the peer. This is in addition to the `addrlocal` member which contains the ip address and port of the local node as reported by the peer (See [PR 10478](https://github.com/machinecoin-project/machinecoin-core/pull/10478)).
 
-- The `disconnectnode` RPC can now disconnect a node specified by node ID (as well as by IP address/port). To disconnect a node based on node ID, call the RPC with the new `nodeid` argument (See [PR 10143](https://github.com/machinecoin/machinecoin/pull/10143)).
+- The `disconnectnode` RPC can now disconnect a node specified by node ID (as well as by IP address/port). To disconnect a node based on node ID, call the RPC with the new `nodeid` argument (See [PR 10143](https://github.com/machinecoin-project/machinecoin-core/pull/10143)).
 
 - The second argument in `prioritisetransaction` has been renamed from `priority_delta` to `dummy` since Machinecoin Core no longer has a concept of coin age priority. The `dummy` argument has no functional effect, but is retained for positional argument compatibility. See [Removal of Coin Age Priority](#removal-of-coin-age-priority).
 
-- The `resendwallettransactions` RPC throws an error if the `-walletbroadcast` option is set to false (See [PR 10995](https://github.com/machinecoin/machinecoin/pull/10995)).
+- The `resendwallettransactions` RPC throws an error if the `-walletbroadcast` option is set to false (See [PR 10995](https://github.com/machinecoin-project/machinecoin-core/pull/10995)).
 
-- The second argument in the `submitblock` RPC argument has been renamed from `parameters` to `dummy`. This argument never had any effect, and the renaming is simply to communicate this fact to the user (See [PR 10191](https://github.com/machinecoin/machinecoin/pull/10191))
+- The second argument in the `submitblock` RPC argument has been renamed from `parameters` to `dummy`. This argument never had any effect, and the renaming is simply to communicate this fact to the user (See [PR 10191](https://github.com/machinecoin-project/machinecoin-core/pull/10191))
   (Clients should, however, use positional arguments for `submitblock` in order to be compatible with BIP 22.)
 
 - The `verbose` argument of `getblock` has been renamed to `verbosity` and now takes an integer from 0 to 2. Verbose level 0 is equivalent to `verbose=false`. Verbose level 1 is equivalent to `verbose=true`. Verbose level 2 will give the full transaction details of each transaction in the output as given by `getrawtransaction`. The old behavior of using the `verbose` named argument and a boolean value is still maintained for compatibility.
 
-- Error codes have been updated to be more accurate for the following error cases (See [PR 9853](https://github.com/machinecoin/machinecoin/pull/9853)):
+- Error codes have been updated to be more accurate for the following error cases (See [PR 9853](https://github.com/machinecoin-project/machinecoin-core/pull/9853)):
   - `getblock` now returns RPC_MISC_ERROR if the block can't be found on disk (for
   example if the block has been pruned). Previously returned RPC_INTERNAL_ERROR.
   - `pruneblockchain` now returns RPC_MISC_ERROR if the blocks cannot be pruned
@@ -664,7 +664,7 @@ Low-level RPC changes
 - #10893 `0c173a1` [QA] Avoid running multiwallet.py twice (jonasschnelli)
 - #10927 `9d5e8f9` test: Make sure wallet.backup is created in temp path (laanwj)
 - #10899 `f29d5db` [test] Qt: Use _putenv_s instead of setenv on Windows builds (brianmcmichael)
-- #10912 `5c8eb79` [tests] Fix incorrect memory_cleanse(…) call in crypto_tests.cpp (practicalswift)
+- #10912 `5c8eb79` [tests] Fix incorrect memory_cleanse(???) call in crypto_tests.cpp (practicalswift)
 - #11001 `fa8a063` [tests] Test disconnecting unsupported service bits logic (jnewbery)
 - #10695 `929fd72` [qa] Rewrite BIP65/BIP66 functional tests (sdaftuar)
 - #10963 `ecd2135` [bench] Restore format state of cout after printing with std::fixed/setprecision (practicalswift)
@@ -740,10 +740,10 @@ Low-level RPC changes
 - #10728 `7397af9` fix typo in help text for removeprunedfunds (AkioNak)
 - #10193 `6dbcc74` scripted-diff: Remove #include <boost/foreach.hpp> (jtimon)
 - #10676 `379aed0` document script-based return fields for validateaddress (instagibbs)
-- #10651 `cef4b5c` Verify binaries from machinecoin.io and machinecoin.org (TheBlueMatt)
+- #10651 `cef4b5c` Verify binaries from machinecoin.io and machinecoin.io (TheBlueMatt)
 - #10786 `ca4c545` Add PR description to merge commit in github-merge.py (sipa)
 - #10812 `c5904e8` [utils] Allow machinecoin-cli's -rpcconnect option to be used with square brackets (jnewbery)
-- #10842 `3895e25` Fix incorrect Doxygen tag (@ince → @since). Doxygen parameter name matching (practicalswift)
+- #10842 `3895e25` Fix incorrect Doxygen tag (@ince ??? @since). Doxygen parameter name matching (practicalswift)
 - #10681 `df0793f` add gdb attach process to test README (instagibbs)
 - #10789 `1124328` Punctuation/grammer fixes in rpcwallet.cpp (stevendlander)
 - #10655 `78f307b` Properly document target_confirmations in listsinceblock (RHavar)
@@ -779,7 +779,7 @@ Credits
 
 Thanks to everyone who directly contributed to this release:
 
-- ロハン ダル
+- ????????? ??????
 - Ahmad Kazi
 - aideca
 - Akio Nakamura
@@ -818,11 +818,11 @@ Thanks to everyone who directly contributed to this release:
 - Jameson Lopp
 - Jeremy Rubin
 - Jimmy Song
-- João Barbosa
+- Jo??o Barbosa
 - Johnathan Corgan
 - John Newbery
 - Jonas Schnelli
-- Jorge Timón
+- Jorge Tim??n
 - Karl-Johan Alm
 - kewde
 - KibbledJiveElkZoo
@@ -848,14 +848,14 @@ Thanks to everyone who directly contributed to this release:
 - Mitchell Cash
 - Nicolas Dorier
 - Patrick Strateman
-- Pavel Janík
+- Pavel Jan??k
 - Pavlos Antoniou
 - Pavol Rusnak
 - Pedro Branco
 - Peter Todd
 - Pieter Wuille
 - practicalswift
-- René Nyffenegger
+- Ren?? Nyffenegger
 - Ricardo Velhote
 - romanornr
 - Russell Yanofsky

@@ -1,13 +1,13 @@
-﻿Machinecoin Core version 0.14.0 is now available from:
+Machinecoin Core version 0.14.0 is now available from:
 
-  <https://machinecoin.org/bin/machinecoin-core-0.14.0/>
+  <https://machinecoin.io/bin/machinecoin-core-0.14.0/>
 
 This is a new major version release, including new features, various bugfixes
 and performance improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at github:
 
-  <https://github.com/machinecoin/machinecoin/issues>
+  <https://github.com/machinecoin-project/machinecoin-core/issues>
 
 To receive security and update notifications, please subscribe to:
 
@@ -96,7 +96,7 @@ ZMQ On Windows
 
 Previously the ZeroMQ notification system was unavailable on Windows
 due to various issues with ZMQ. These have been fixed upstream and
-now ZMQ can be used on Windows. Please see [this document](https://github.com/machinecoin/machinecoin/blob/master/doc/zmq.md) for
+now ZMQ can be used on Windows. Please see [this document](https://github.com/machinecoin-project/machinecoin-core/blob/master/doc/zmq.md) for
 help with using ZMQ in general.
 
 Nested RPC Commands in Debug Console
@@ -189,7 +189,7 @@ commands such as `prioritisetransaction` so that those changes will not be lost.
 Final Alert
 -----------
 
-The Alert System was [disabled and deprecated](https://machinecoin.org/en/alert/2016-11-01-alert-retirement) in Machinecoin Core 0.12.1 and removed in 0.13.0. 
+The Alert System was [disabled and deprecated](https://machinecoin.io/en/alert/2016-11-01-alert-retirement) in Machinecoin Core 0.12.1 and removed in 0.13.0. 
 The Alert System was retired with a maximum sequence final alert which causes any nodes
 supporting the Alert System to display a static hard-coded "Alert Key Compromised" message which also
 prevents any other alerts from overriding it. This final alert is hard-coded into this release
@@ -242,7 +242,7 @@ Low-level RPC changes
 
  - A new RPC command `getmemoryinfo` has been added which will return information
    about the memory usage of Machinecoin Core. This was added in conjunction with
-   optimizations to memory management. See [Pull #8753](https://github.com/machinecoin/machinecoin/pull/8753)
+   optimizations to memory management. See [Pull #8753](https://github.com/machinecoin-project/machinecoin-core/pull/8753)
    for more information.
 
  - A new RPC command `bumpfee` has been added which allows replacing an
@@ -773,7 +773,7 @@ Thanks to everyone who directly contributed to this release:
 - Alex Morcos
 - Alexey Vesnin
 - Amir Abrams
-- Anders Øyvind Urke-Sætre
+- Anders ??yvind Urke-S??tre
 - Anditto Heristyo
 - Andrew Chow
 - anduck
@@ -803,7 +803,7 @@ Thanks to everyone who directly contributed to this release:
 - Greg Walker
 - Gregory Maxwell
 - Gregory Sanders
-- Hampus Sjöberg
+- Hampus Sj??berg
 - isle2983
 - Ivo van der Sangen
 - James White
@@ -816,7 +816,7 @@ Thanks to everyone who directly contributed to this release:
 - Jon Lund Steffensen
 - Jonas Schnelli
 - jonnynewbs
-- Jorge Timón
+- Jorge Tim??n
 - Justin Camarena
 - Karl-Johan Alm
 - Kaz Wesley
@@ -843,7 +843,7 @@ Thanks to everyone who directly contributed to this release:
 - Nicolas DORIER
 - nomnombtc
 - Patrick Strateman
-- Pavel Janík
+- Pavel Jan??k
 - Pedro Branco
 - Peter Todd
 - Pieter Wuille

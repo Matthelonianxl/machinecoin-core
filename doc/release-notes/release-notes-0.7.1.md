@@ -1,20 +1,20 @@
-﻿Machinecoin version 0.7.1 is now available from:
-  http://sourceforge.net/projects/machinecoin/files/Machinecoin/machinecoin-0.7.1/
+Machinecoin version 0.7.1 is now available from:
+  http://sourceforge.net/projects/machinecoin/files/machinecoin-project/machinecoin-core-0.7.1/
 
 This is a bug-fix minor release.
 
 Please report bugs using the issue tracker at github:
-  https://github.com/machinecoin/machinecoin/issues
+  https://github.com/machinecoin-project/machinecoin-core/issues
 
 Project source code is hosted at github; you can get
 source-only tarballs/zipballs directly from there:
-  https://github.com/machinecoin/machinecoin/tarball/v0.7.1  # .tar.gz
-  https://github.com/machinecoin/machinecoin/zipball/v0.7.1  # .zip
+  https://github.com/machinecoin-project/machinecoin-core/tarball/v0.7.1  # .tar.gz
+  https://github.com/machinecoin-project/machinecoin-core/zipball/v0.7.1  # .zip
 
 Ubuntu Linux users can use the "Personal Package Archive" (PPA)
 maintained by Matt Corallo to automatically keep 
 up-to-date.  Just type:
-  sudo apt-add-repository ppa:machinecoin/machinecoin
+  sudo apt-add-repository ppa:bitcoin/bitcoin
   sudo apt-get update
 in your terminal, then install the machinecoin-qt package:
   sudo apt-get install machinecoin-qt

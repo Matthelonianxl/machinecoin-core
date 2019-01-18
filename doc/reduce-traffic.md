@@ -1,9 +1,9 @@
-﻿Reduce Traffic
+Reduce Traffic
 ==============
 
 Some node operators need to deal with bandwidth caps imposed by their ISPs.
 
-By default, machinecoin-core allows up to 125 connections to different peers, 8 of
+By default, Machinecoin Core allows up to 125 connections to different peers, 8 of
 which are outbound. You can therefore, have at most 117 inbound connections.
 
 The default settings can result in relatively significant traffic consumption.

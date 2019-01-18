@@ -1,13 +1,16 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
+export LC_ALL=C
 TOPDIR=${TOPDIR:-$(git rev-parse --show-toplevel)}
-SRCDIR=${SRCDIR:-$TOPDIR/src}
+BUILDDIR=${BUILDDIR:-$TOPDIR}
+
+BINDIR=${BINDIR:-$BUILDDIR/src}
 MANDIR=${MANDIR:-$TOPDIR/doc/man}
 
-MACHINECOIND=${MACHINECOIND:-$SRCDIR/machinecoind}
-MACHINECOINCLI=${MACHINECOINCLI:-$SRCDIR/machinecoin-cli}
-MACHINECOINTX=${MACHINECOINTX:-$SRCDIR/machinecoin-tx}
-MACHINECOINQT=${MACHINECOINQT:-$SRCDIR/qt/machinecoin-qt}
+MACHINECOIND=${MACHINECOIND:-$BINDIR/machinecoind}
+MACHINECOINCLI=${MACHINECOINCLI:-$BINDIR/machinecoin-cli}
+MACHINECOINTX=${MACHINECOINTX:-$BINDIR/machinecoin-tx}
+MACHINECOINQT=${MACHINECOINQT:-$BINDIR/qt/machinecoin-qt}
 
 [ ! -x $MACHINECOIND ] && echo "$MACHINECOIND not found or not executable." && exit 1
 

@@ -2,8 +2,8 @@
 // Copyright (c) 2009-2018 The Machinecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#ifndef MACHINECOIN_POLICYESTIMATOR_H
-#define MACHINECOIN_POLICYESTIMATOR_H
+#ifndef MACHINECOIN_POLICY_FEES_H
+#define MACHINECOIN_POLICY_FEES_H
 
 #include <amount.h>
 #include <policy/feerate.h>
@@ -69,7 +69,7 @@ class TxConfirmStats;
 
 /* Identifier for each of the 3 different TxConfirmStats which will track
  * history over different time horizons. */
-enum FeeEstimateHorizon {
+enum class FeeEstimateHorizon {
     SHORT_HALFLIFE = 0,
     MED_HALFLIFE = 1,
     LONG_HALFLIFE = 2
@@ -224,7 +224,7 @@ public:
     bool Read(CAutoFile& filein);
 
     /** Empty mempool transactions on shutdown to record failure to confirm for txs still in mempool */
-    void FlushUnconfirmed(CTxMemPool& pool);
+    void FlushUnconfirmed();
 
     /** Calculation of highest target that estimates are tracked for */
     unsigned int HighestTargetTracked(FeeEstimateHorizon horizon) const;
@@ -295,4 +295,4 @@ private:
     FastRandomContext insecure_rand;
 };
 
-#endif /*MACHINECOIN_POLICYESTIMATOR_H */
+#endif // MACHINECOIN_POLICY_FEES_H

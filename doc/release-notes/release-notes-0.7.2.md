@@ -1,10 +1,10 @@
-﻿Machinecoin version 0.7.2 is now available from:
-  http://sourceforge.net/projects/machinecoin/files/Machinecoin/machinecoin-0.7.2
+Machinecoin version 0.7.2 is now available from:
+  http://sourceforge.net/projects/machinecoin/files/machinecoin-project/machinecoin-core-0.7.2
 
 This is a bug-fix minor release.
 
 Please report bugs using the issue tracker at github:
-  https://github.com/machinecoin/machinecoin/issues
+  https://github.com/machinecoin-project/machinecoin-core/issues
 
 How to Upgrade
 --------------

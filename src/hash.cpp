@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2013-2018 The Machinecoin Core developers
+// Copyright (c) 2013-2018 The Machinecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -27,7 +27,7 @@ unsigned int MurmurHash3(unsigned int nHashSeed, const std::vector<unsigned char
 
     for (int i = 0; i < nblocks; ++i) {
         uint32_t k1 = ReadLE32(blocks + i*4);
-        
+
         k1 *= c1;
         k1 = ROTL32(k1, 15);
         k1 *= c2;

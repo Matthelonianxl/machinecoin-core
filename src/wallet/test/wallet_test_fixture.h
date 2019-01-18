@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef MACHINECOIN_WALLET_TEST_FIXTURE_H
-#define MACHINECOIN_WALLET_TEST_FIXTURE_H
+#ifndef MACHINECOIN_WALLET_TEST_WALLET_TEST_FIXTURE_H
+#define MACHINECOIN_WALLET_TEST_WALLET_TEST_FIXTURE_H
 
 #include <test/test_machinecoin.h>
 
@@ -17,8 +17,7 @@ struct WalletTestingSetup: public TestingSetup {
     explicit WalletTestingSetup(const std::string& chainName = CBaseChainParams::MAIN);
     ~WalletTestingSetup();
 
-    std::unique_ptr<CWallet> pwalletMain;
+    CWallet m_wallet;
 };
 
-#endif
-
+#endif // MACHINECOIN_WALLET_TEST_WALLET_TEST_FIXTURE_H

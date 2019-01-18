@@ -1,13 +1,13 @@
-﻿Machinecoin Core version 0.10.0 is now available from:
+Machinecoin Core version 0.10.0 is now available from:
 
-  https://machinecoin.org/bin/0.10.0/
+  https://machinecoin.io/bin/0.10.0/
 
 This is a new major version release, bringing both new features and
 bug fixes.
 
 Please report bugs using the issue tracker at github:
 
-  https://github.com/machinecoin/machinecoin/issues
+  https://github.com/machinecoin-project/machinecoin-core/issues
 
 Upgrading and downgrading
 =========================
@@ -230,7 +230,7 @@ bindings such as [python-machinecoinlib](https://pypi.python.org/pypi/python-mac
 alternative node implementations.
 
 This library is called `libmachinecoinconsensus.so` (or, `.dll` for Windows).
-Its interface is defined in the C header [machinecoinconsensus.h](https://github.com/machinecoin/machinecoin/blob/0.10/src/script/machinecoinconsensus.h).
+Its interface is defined in the C header [machinecoinconsensus.h](https://github.com/machinecoin-project/machinecoin-core/blob/0.10/src/script/machinecoinconsensus.h).
 
 In its initial version the API includes two functions:
 

@@ -1,4 +1,4 @@
-﻿# Block and Transaction Broadcasting with ZeroMQ
+# Block and Transaction Broadcasting with ZeroMQ
 
 [ZeroMQ](http://zeromq.org/) is a lightweight wrapper around TCP
 connections, inter-process communication, and shared-memory,
@@ -101,6 +101,6 @@ and just the tip will be notified. It is up to the subscriber to
 retrieve the chain from the last known block to the new tip.
 
 There are several possibilities that ZMQ notification can get lost
-during transmission depending on the communication type your are
+during transmission depending on the communication type you are
 using. Machinecoind appends an up-counting sequence number to each
 notification which allows listeners to detect lost notifications.

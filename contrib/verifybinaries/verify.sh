@@ -1,16 +1,17 @@
-﻿#!/bin/bash
+#!/usr/bin/env bash
 # Copyright (c) 2016 The Machinecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 ###   This script attempts to download the signature file SHA256SUMS.asc from
-###   machinecoin.io and machinecoin.org and compares them.
+###   machinecoin.io and machinecoin.io and compares them.
 ###   It first checks if the signature passes, and then downloads the files specified in
 ###   the file, and checks if the hashes of these files match those that are specified
 ###   in the signature file.
 ###   The script returns 0 if everything passes the checks. It returns 1 if either the
 ###   signature check or the hash check doesn't pass. If an error occurs the return value is 2
 
+export LC_ALL=C
 function clean_up {
    for file in $*
    do
@@ -24,7 +25,7 @@ TMPFILE="hashes.tmp"
 SIGNATUREFILENAME="SHA256SUMS.asc"
 RCSUBDIR="test"
 HOST1="https://machinecoin.io"
-HOST2="https://machinecoin.org"
+HOST2="https://machinecoin.io"
 BASEDIR="/bin/"
 VERSIONPREFIX="machinecoin-core-"
 RCVERSIONSTRING="rc"
@@ -95,7 +96,7 @@ fi
 
 WGETOUT=$(wget -N -O "$SIGNATUREFILENAME.2" "$HOST2$BASEDIR$SIGNATUREFILENAME" 2>&1)
 if [ $? -ne 0 ]; then
-   echo "machinecoin.org failed to provide signature file, but machinecoin.io did?"
+   echo "machinecoin.io failed to provide signature file, but machinecoin.io did?"
    echo "wget output:"
    echo "$WGETOUT"|sed 's/^/\t/g'
    clean_up $SIGNATUREFILENAME
@@ -104,7 +105,7 @@ fi
 
 SIGFILEDIFFS="$(diff $SIGNATUREFILENAME $SIGNATUREFILENAME.2)"
 if [ "$SIGFILEDIFFS" != "" ]; then
-   echo "machinecoin.org and machinecoin.io signature files were not equal?"
+   echo "machinecoin.io and machinecoin.io signature files were not equal?"
    clean_up $SIGNATUREFILENAME $SIGNATUREFILENAME.2
    exit 4
 fi

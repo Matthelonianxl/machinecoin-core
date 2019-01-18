@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2012-2018 The Machinecoin Core developers
+// Copyright (c) 2012-2018 The Machinecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -6,9 +6,10 @@
 
 #include <tinyformat.h>
 
+
 /**
  * Name of client reported in the 'version' message. Report the same name
- * for both machinecoind and machinecoin-core, to make it harder for attackers to
+ * for both machinecoind and machinecoin-qt, to make it harder for attackers to
  * target servers or GUI users specifically.
  */
 const std::string CLIENT_NAME("Octopus");
@@ -43,8 +44,8 @@ const std::string CLIENT_NAME("Octopus");
 //! git will put "#define GIT_ARCHIVE 1" on the next line inside archives. 
 #define GIT_ARCHIVE 1
 #ifdef GIT_ARCHIVE
-#define GIT_COMMIT_ID "88b96ef"
-#define GIT_COMMIT_DATE "Sun, 18 Nov 2018 16:14:08 +0100"
+#define GIT_COMMIT_ID "0a0b2ea11fde7becbdd1c04205336c3a39bffbc0"
+#define GIT_COMMIT_DATE "Mon, 7 Jan 2019 14:43:03 +0100"
 #endif
 
 #define BUILD_DESC_WITH_SUFFIX(maj, min, rev, build, suffix) \
@@ -68,7 +69,7 @@ const std::string CLIENT_NAME("Octopus");
 
 const std::string CLIENT_BUILD(BUILD_DESC CLIENT_VERSION_SUFFIX);
 
-std::string FormatVersion(int nVersion)
+static std::string FormatVersion(int nVersion)
 {
     if (nVersion % 100 == 0)
         return strprintf("%d.%d.%d", nVersion / 1000000, (nVersion / 10000) % 100, (nVersion / 100) % 100);
@@ -82,7 +83,7 @@ std::string FormatFullVersion()
 }
 
 /**
- * Format the subversion field according to BIP 14 spec (https://github.com/machinecoin/bips/blob/master/bip-0014.mediawiki) 
+ * Format the subversion field according to BIP 14 spec (https://github.com/machinecoin/bips/blob/master/bip-0014.mediawiki)
  */
 std::string FormatSubVersion(const std::string& name, int nClientVersion, const std::vector<std::string>& comments)
 {

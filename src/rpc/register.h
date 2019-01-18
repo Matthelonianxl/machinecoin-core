@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef MACHINECOIN_RPCREGISTER_H
-#define MACHINECOIN_RPCREGISTER_H
+#ifndef MACHINECOIN_RPC_REGISTER_H
+#define MACHINECOIN_RPC_REGISTER_H
 
 /** These are in one header file to avoid creating tons of single-function
  * headers for everything under src/rpc/ */
@@ -35,4 +35,4 @@ static inline void RegisterAllCoreRPCCommands(CRPCTable &t)
     RegisterRawTransactionRPCCommands(t);
 }
 
-#endif
+#endif // MACHINECOIN_RPC_REGISTER_H

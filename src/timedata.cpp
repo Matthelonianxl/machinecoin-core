@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2014-2018 The Machinecoin Core developers
+// Copyright (c) 2014-2018 The Machinecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -17,7 +17,7 @@
 
 
 static CCriticalSection cs_nTimeOffset;
-static int64_t nTimeOffset = 0;
+static int64_t nTimeOffset GUARDED_BY(cs_nTimeOffset) = 0;
 
 /**
  * "Never go to sea with two chronometers; take one or three."
@@ -110,9 +110,9 @@ void AddTimeData(const CNetAddr& ip, int64_t nOffsetSample)
 
         if (LogAcceptCategory(MCLog::NET)) {
             for (int64_t n : vSorted) {
-                LogPrint(MCLog::NET, "%+d  ", n);
+                LogPrint(MCLog::NET, "%+d  ", n); /* Continued */
             }
-            LogPrint(MCLog::NET, "|  ");
+            LogPrint(MCLog::NET, "|  "); /* Continued */
 
             LogPrint(MCLog::NET, "nTimeOffset = %+d  (%+d minutes)\n", nTimeOffset, nTimeOffset/60);
         }

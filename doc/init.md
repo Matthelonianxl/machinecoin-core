@@ -1,4 +1,4 @@
-﻿Sample init scripts and service configuration for machinecoind
+Sample init scripts and service configuration for machinecoind
 ==========================================================
 
 Sample scripts and configuration files for systemd, Upstart and OpenRC
@@ -15,7 +15,7 @@ Service User
 
 All three Linux startup configurations assume the existence of a "machinecoin" user
 and group.  They must be created before attempting to use these scripts.
-The OS X configuration assumes machinecoind will be set up for the current user.
+The macOS configuration assumes machinecoind will be set up for the current user.
 
 Configuration
 ---------------------------------
@@ -44,7 +44,7 @@ This allows for running machinecoind without having to do any manual configurati
 relative to the data directory. `wallet` *only* supports relative paths.
 
 For an example configuration file that describes the configuration settings,
-see `contrib/debian/examples/machinecoin.conf`.
+see `share/examples/machinecoin.conf`.
 
 Paths
 ---------------------------------
@@ -54,7 +54,7 @@ Paths
 All three configurations assume several paths that might need to be adjusted.
 
 Binary:              `/usr/bin/machinecoind`  
-Configuration file:  `/etc/machinecoin/machinecoin.conf`  
+Configuration file:  `/etc/machinecoin-project/machinecoin-core.conf`  
 Data directory:      `/var/lib/machinecoind`  
 PID file:            `/var/run/machinecoind/machinecoind.pid` (OpenRC and Upstart) or `/var/lib/machinecoind/machinecoind.pid` (systemd)  
 Lock file:           `/var/lock/subsys/machinecoind` (CentOS)  
@@ -65,10 +65,10 @@ reasons to make the configuration file and data directory only readable by the
 machinecoin user and group.  Access to machinecoin-cli and other machinecoind rpc clients
 can then be controlled by group membership.
 
-### Mac OS X
+### macOS
 
 Binary:              `/usr/local/bin/machinecoind`  
-Configuration file:  `~/Library/Application Support/Machinecoin/machinecoin.conf`  
+Configuration file:  `~/Library/Application Support/machinecoin-project/machinecoin-core.conf`  
 Data directory:      `~/Library/Application Support/Machinecoin`  
 Lock file:           `~/Library/Application Support/Machinecoin/.lock`  
 
@@ -84,6 +84,8 @@ Installing this .service file consists of just copying it to
 To test, run `systemctl start machinecoind` and to enable for system startup run
 `systemctl enable machinecoind`
 
+NOTE: When installing for systemd in Debian/Ubuntu the .service file needs to be copied to the /lib/systemd/system directory instead.
+
 ### OpenRC
 
 Rename machinecoind.openrc to machinecoind and drop it in /etc/init.d.  Double
@@ -92,6 +94,8 @@ check ownership and permissions and make it executable.  Test it with
 `rc-update add machinecoind`
 
 ### Upstart (for Debian/Ubuntu based distributions)
+
+Upstart is the default init system for Debian/Ubuntu versions older than 15.04. If you are using version 15.04 or newer and haven't manually configured upstart you should follow the systemd instructions instead.
 
 Drop machinecoind.conf in /etc/init.  Test by running `service machinecoind start`
 it will automatically start on reboot.
@@ -107,7 +111,7 @@ Using this script, you can adjust the path and flags to the machinecoind program
 setting the MACHINECOIND and FLAGS environment variables in the file
 /etc/sysconfig/machinecoind. You can also use the DAEMONOPTS environment variable here.
 
-### Mac OS X
+### macOS
 
 Copy org.machinecoin.machinecoind.plist into ~/Library/LaunchAgents. Load the launch agent by
 running `launchctl load ~/Library/LaunchAgents/org.machinecoin.machinecoind.plist`.

@@ -1,10 +1,10 @@
-﻿// Copyright (c) 2010 Satoshi Nakamoto
+// Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2018 The Machinecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef MACHINECOIN_RPCCLIENT_H
-#define MACHINECOIN_RPCCLIENT_H
+#ifndef MACHINECOIN_RPC_CLIENT_H
+#define MACHINECOIN_RPC_CLIENT_H
 
 #include <univalue.h>
 
@@ -19,4 +19,4 @@ UniValue RPCConvertNamedValues(const std::string& strMethod, const std::vector<s
  */
 UniValue ParseNonRFCJSONValue(const std::string& strVal);
 
-#endif // MACHINECOIN_RPCCLIENT_H
+#endif // MACHINECOIN_RPC_CLIENT_H

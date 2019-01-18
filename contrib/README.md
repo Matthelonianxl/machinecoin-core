@@ -1,4 +1,4 @@
-﻿Repository Tools
+Repository Tools
 ---------------------
 
 ### [Developer tools](/contrib/devtools) ###
@@ -21,9 +21,10 @@ Utility to generate the pnSeed[] array that is compiled into the client.
 Build Tools and Keys
 ---------------------
 
-### [Debian](/contrib/debian) ###
-Contains files used to package machinecoind/machinecoin-qt
-for Debian-based Linux systems. If you compile machinecoind/machinecoin-qt yourself, there are some useful files here.
+### Packaging ###
+The [Debian](/contrib/debian) subfolder contains the copyright file.
+
+All other packaging related files can be found in the [machinecoin-core/packaging](https://github.com/machinecoin-core/packaging) repository.
 
 ### [Gitian-descriptors](/contrib/gitian-descriptors) ###
 Files used during the gitian build process. For more information about gitian, see the [the Machinecoin Core documentation repository](https://github.com/machinecoin-core/docs).
@@ -34,10 +35,7 @@ PGP keys used for signing Machinecoin Core [Gitian release](/doc/release-process
 ### [MacDeploy](/contrib/macdeploy) ###
 Scripts and notes for Mac builds. 
 
-### [RPM](/contrib/rpm) ###
-RPM spec file for building machinecoin-core on RPM based distributions.
-
-### [Gitian-build](/contrib/gitian-build.sh) ###
+### [Gitian-build](/contrib/gitian-build.py) ###
 Script for running full Gitian builds.
 
 Test and Verify Tools 
@@ -47,4 +45,4 @@ Test and Verify Tools
 Utilities to generate test vectors for the data-driven Machinecoin tests.
 
 ### [Verify Binaries](/contrib/verifybinaries) ###
-This script attempts to download and verify the signature file SHA256SUMS.asc from machinecoin.org.
+This script attempts to download and verify the signature file SHA256SUMS.asc from machinecoin.io.

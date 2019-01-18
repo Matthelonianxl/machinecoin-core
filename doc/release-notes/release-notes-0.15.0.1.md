@@ -1,6 +1,6 @@
-﻿Machinecoin Core version *0.15.0.1* is now available from:
+Machinecoin Core version *0.15.0.1* is now available from:
 
-  <https://machinecoin.org/bin/machinecoin-core-0.15.0.1/>
+  <https://machinecoin.io/bin/machinecoin-core-0.15.0.1/>
 
 and
 
@@ -10,7 +10,7 @@ This is a minor bug fix for 0.15.0.
 
 Please report bugs using the issue tracker at GitHub:
 
-  <https://github.com/machinecoin/machinecoin/issues>
+  <https://github.com/machinecoin-project/machinecoin-core/issues>
 
 To receive security and update notifications, please subscribe to:
 

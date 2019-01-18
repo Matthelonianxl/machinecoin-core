@@ -1,10 +1,10 @@
-﻿Machinecoin version 0.6.3 is now available for download at:
-  http://sourceforge.net/projects/machinecoin/files/Machinecoin/machinecoin-0.6.3/
+Machinecoin version 0.6.3 is now available for download at:
+  http://sourceforge.net/projects/machinecoin/files/machinecoin-project/machinecoin-core-0.6.3/
 
 This is a bug-fix release, with no new features.
 
 Please report bugs using the issue tracker at github:
-  https://github.com/machinecoin/machinecoin/issues
+  https://github.com/machinecoin-project/machinecoin-core/issues
 
 CHANGE SUMMARY
 

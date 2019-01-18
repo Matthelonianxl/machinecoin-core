@@ -40,7 +40,7 @@ public:
     }
 
     template<typename T>
-    TxInputStream& operator>>(T& obj)
+    TxInputStream& operator>>(T&& obj)
     {
         ::Unserialize(*this, obj);
         return *this;
@@ -81,7 +81,7 @@ static int verify_script(const unsigned char *scriptPubKey, unsigned int scriptP
                                     unsigned int nIn, unsigned int flags, machinecoinconsensus_error* err)
 {
     if (!verify_flags(flags)) {
-        return machinecoinconsensus_ERR_INVALID_FLAGS;
+        return set_error(err, machinecoinconsensus_ERR_INVALID_FLAGS);
     }
     try {
         TxInputStream stream(SER_NETWORK, PROTOCOL_VERSION, txTo, txToLen);

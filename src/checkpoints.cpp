@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2009-2018 The Machinecoin Core developers
+// Copyright (c) 2009-2018 The Machinecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -21,9 +21,10 @@ namespace Checkpoints {
         for (const MapCheckpoints::value_type& i : reverse_iterate(checkpoints))
         {
             const uint256& hash = i.second;
-            BlockMap::const_iterator t = mapBlockIndex.find(hash);
-            if (t != mapBlockIndex.end())
-                return t->second;
+            CBlockIndex* pindex = LookupBlockIndex(hash);
+            if (pindex) {
+                return pindex;
+            }
         }
         return nullptr;
     }

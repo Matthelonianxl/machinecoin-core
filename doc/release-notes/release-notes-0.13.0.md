@@ -1,13 +1,13 @@
-﻿Machinecoin Core version 0.13.0 is now available from:
+Machinecoin Core version 0.13.0 is now available from:
 
-  <https://machinecoin.org/bin/machinecoin-core-0.13.0/>
+  <https://machinecoin.io/bin/machinecoin-core-0.13.0/>
 
 This is a new major version release, including new features, various bugfixes
 and performance improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at github:
 
-  <https://github.com/machinecoin/machinecoin/issues>
+  <https://github.com/machinecoin-project/machinecoin-core/issues>
 
 To receive security and update notifications, please subscribe to:
 
@@ -22,7 +22,7 @@ updates will be released anymore. Without security updates, using a machinecoin
 wallet on a XP machine is irresponsible at least.
 
 In addition to that, with 0.12.x there have been varied reports of Machinecoin Core
-randomly crashing on Windows XP. It is [not clear](https://github.com/machinecoin/machinecoin/issues/7681#issuecomment-217439891)
+randomly crashing on Windows XP. It is [not clear](https://github.com/machinecoin-project/machinecoin-core/issues/7681#issuecomment-217439891)
 what the source of these crashes is, but it is likely that upstream
 libraries such as Qt are no longer being tested on XP.
 
@@ -158,7 +158,7 @@ There is no distinction between internal (change) and external keys.
 
 HD wallets are incompatible with older versions of Machinecoin Core.
 
-[Pull request](https://github.com/machinecoin/machinecoin/pull/8035/files), [BIP 32](https://github.com/machinecoin/bips/blob/master/bip-0032.mediawiki)
+[Pull request](https://github.com/machinecoin-project/machinecoin-core/pull/8035/files), [BIP 32](https://github.com/machinecoin/bips/blob/master/bip-0032.mediawiki)
 
 
 Segregated Witness
@@ -358,7 +358,7 @@ Low-level ZMQ changes
   listeners to detect lost notifications.
   The sequence number is always the last element in a multi-part ZMQ notification and
   therefore backward compatible. Each message type has its own counter.
-  PR [#7762](https://github.com/machinecoin/machinecoin/pull/7762).
+  PR [#7762](https://github.com/machinecoin-project/machinecoin-core/pull/7762).
 
 
 0.13.0 Change log

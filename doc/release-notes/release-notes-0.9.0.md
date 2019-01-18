@@ -1,13 +1,13 @@
-﻿Machinecoin Core version 0.9.0 is now available from:
+Machinecoin Core version 0.9.0 is now available from:
 
-  https://machinecoin.org/bin/0.9.0/
+  https://machinecoin.io/bin/0.9.0/
 
 This is a new major version release, bringing both new features and
 bug fixes.
 
 Please report bugs using the issue tracker at github:
 
-  https://github.com/machinecoin/machinecoin/issues
+  https://github.com/machinecoin-project/machinecoin-core/issues
 
 How to Upgrade
 --------------
@@ -348,7 +348,7 @@ Thanks to everyone who contributed to this release:
 - Gavin Andresen
 - Gregory Maxwell
 - gubatron
-- Guillermo Céspedes Tabárez
+- Guillermo C??spedes Tab??rez
 - Haakon Nilsen
 - HaltingState
 - Han Lin Yap
@@ -402,7 +402,7 @@ Thanks to everyone who contributed to this release:
 - Timon Rapp
 - Timothy Stranex
 - Tom Geller
-- Torstein Husebø
+- Torstein Huseb??
 - Vaclav Vobornik
 - vhf / victor felder
 - Vinnie Falco

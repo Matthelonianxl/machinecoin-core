@@ -1,5 +1,5 @@
-﻿Machinecoin version 0.6.0 is now available for download at:
-http://sourceforge.net/projects/machinecoin/files/Machinecoin/machinecoin-0.6.0/test/
+Machinecoin version 0.6.0 is now available for download at:
+http://sourceforge.net/projects/machinecoin/files/machinecoin-project/machinecoin-core-0.6.0/test/
 
 This release includes more than 20 language localizations.
 More translations are welcome; join the
@@ -7,18 +7,18 @@ project at Transifex to help:
 https://www.transifex.net/projects/p/machinecoin/
 
 Please report bugs using the issue tracker at github:
-https://github.com/machinecoin/machinecoin/issues
+https://github.com/machinecoin-project/machinecoin-core/issues
 
 Project source code is hosted at github; we are no longer
 distributing .tar.gz files here, you can get them
 directly from github:
-https://github.com/machinecoin/machinecoin/tarball/v0.6.0  # .tar.gz
-https://github.com/machinecoin/machinecoin/zipball/v0.6.0  # .zip
+https://github.com/machinecoin-project/machinecoin-core/tarball/v0.6.0  # .tar.gz
+https://github.com/machinecoin-project/machinecoin-core/zipball/v0.6.0  # .zip
 
 For Ubuntu users, there is a ppa maintained by Matt Corallo which
 you can add to your system so that it will automatically keep
 machinecoin up-to-date.  Just type
-sudo apt-add-repository ppa:machinecoin/machinecoin
+sudo apt-add-repository ppa:bitcoin/bitcoin
 in your terminal, then install the machinecoin-qt package.
 
 

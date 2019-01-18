@@ -1,4 +1,4 @@
-﻿Machinecoin Core
+Machinecoin Core
 =============
 
 Setup
@@ -9,7 +9,7 @@ To download Machinecoin Core, visit [machinecoin.io](https://machinecoin.io/en/r
 
 Running
 ---------------------
-The following are some helpful notes on how to run Machinecoin on your native platform.
+The following are some helpful notes on how to run Machinecoin Core on your native platform.
 
 ### Unix
 
@@ -22,9 +22,9 @@ Unpack the files into a directory and run:
 
 Unpack the files into a directory, and then run machinecoin-qt.exe.
 
-### OS X
+### macOS
 
-Drag Machinecoin-Core to your applications folder, and then run Machinecoin-Core.
+Drag Machinecoin Core to your applications folder, and then run Machinecoin Core.
 
 ### Need Help?
 
@@ -35,13 +35,14 @@ for help and more information.
 
 Building
 ---------------------
-The following are developer notes on how to build Machinecoin on your native platform. They are not complete guides, but include notes on the necessary libraries, compile flags, etc.
+The following are developer notes on how to build Machinecoin Core on your native platform. They are not complete guides, but include notes on the necessary libraries, compile flags, etc.
 
 - [Dependencies](dependencies.md)
-- [OS X Build Notes](build-osx.md)
+- [macOS Build Notes](build-osx.md)
 - [Unix Build Notes](build-unix.md)
 - [Windows Build Notes](build-windows.md)
 - [OpenBSD Build Notes](build-openbsd.md)
+- [NetBSD Build Notes](build-netbsd.md)
 - [Gitian Building Guide](gitian-building.md)
 
 Development
@@ -74,6 +75,7 @@ The Machinecoin repo's [root README](/README.md) contains relevant information o
 - [Tor Support](tor.md)
 - [Init Scripts (systemd/upstart/openrc)](init.md)
 - [ZMQ](zmq.md)
+- [PSBT support](psbt.md)
 
 License
 ---------------------

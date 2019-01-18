@@ -1,13 +1,13 @@
-﻿Machinecoin Core version 0.11.0 is now available from:
+Machinecoin Core version 0.11.0 is now available from:
 
-  <https://machinecoin.org/bin/machinecoin-core-0.11.0/>
+  <https://machinecoin.io/bin/machinecoin-core-0.11.0/>
 
 This is a new major version release, bringing both new features and
 bug fixes.
 
 Please report bugs using the issue tracker at github:
 
-  <https://github.com/machinecoin/machinecoin/issues>
+  <https://github.com/machinecoin-project/machinecoin-core/issues>
 
 Upgrading and downgrading
 =========================
@@ -458,7 +458,7 @@ Thanks to everyone who directly contributed to this release:
 - Jeff Garzik
 - Jonas Schnelli
 - Jonathan Brown
-- Jorge Timón
+- Jorge Tim??n
 - joshr
 - jtimon
 - Julian Yap
@@ -474,7 +474,7 @@ Thanks to everyone who directly contributed to this release:
 - mrbandrews
 - Nicolas Benoit
 - paveljanik
-- Pavel Janík
+- Pavel Jan??k
 - Pavel Vasin
 - Peter Todd
 - Philip Kaufmann

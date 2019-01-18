@@ -1,6 +1,6 @@
-﻿Machinecoin Core version 0.9.5 is now available from:
+Machinecoin Core version 0.9.5 is now available from:
 
-  https://machinecoin.org/bin/0.9.5/
+  https://machinecoin.io/bin/0.9.5/
 
 This is a new minor version release, with the goal of backporting BIP66. There
 are also a few bug fixes and updated translations. Upgrading to this release is
@@ -8,7 +8,7 @@ recommended.
 
 Please report bugs using the issue tracker at github:
 
-  https://github.com/machinecoin/machinecoin/issues
+  https://github.com/machinecoin-project/machinecoin-core/issues
 
 How to Upgrade
 ===============

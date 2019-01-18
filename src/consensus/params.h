@@ -49,11 +49,9 @@ struct BIP9Deployment {
 struct Params {
     uint256 hashGenesisBlock;
     int nSubsidyHalvingInterval;
-    /** Block height at which BIP16 becomes active
-     *  Not needed by Machinecoin.
-     */
-    // int BIP16Height;
-    
+    /* Block hash that is excepted from BIP16 enforcement */
+    uint256 BIP16Exception;
+
     // Masternodes
     int nMasternodePaymentsStartBlock;
     int nSuperblockStartBlock;
@@ -62,8 +60,6 @@ struct Params {
     int nGovernanceFilterElements;
     int nMasternodeMinimumConfirmations;
 
-    /** Block height at which BIP16 becomes active */
-    int BIP16Height;
     /** Block height and hash at which BIP34 becomes active */
     int BIP34Height;
     uint256 BIP34Hash;
@@ -86,11 +82,11 @@ struct Params {
     int64_t nPowTargetSpacing;
     int64_t nPowTargetTimespan;
     int64_t DifficultyAdjustmentInterval() const { return nPowTargetTimespan / nPowTargetSpacing; }
-		  // Machinecoin TimeTravel
-		  int64_t nPowTargetSpacingV2;
+    // Machinecoin TimeTravel
+    int64_t nPowTargetSpacingV2;
     int64_t nPowTargetTimespanV2;
     int64_t DifficultyAdjustmentIntervalV2() const { return nPowTargetTimespanV2 / nPowTargetSpacingV2; }
-		  // int64_t nPowTargetSpacingV3;
+    // int64_t nPowTargetSpacingV3;
     // int64_t nPowTargetTimespanV3;
     // int64_t DifficultyAdjustmentIntervalV3() const { return nPowTargetTimespanV3 / nPowTargetSpacingV3; }
     uint256 nMinimumChainWork;

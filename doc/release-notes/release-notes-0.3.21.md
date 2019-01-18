@@ -1,5 +1,5 @@
-﻿Binaries for Machinecoin version 0.3.21 are available at:
-  https://sourceforge.net/projects/machinecoin/files/Machinecoin/machinecoin-0.3.21/
+Binaries for Machinecoin version 0.3.21 are available at:
+  https://sourceforge.net/projects/machinecoin/files/machinecoin-project/machinecoin-core-0.3.21/
 
 Changes and new features from the 0.3.20 release include:
 

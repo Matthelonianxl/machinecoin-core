@@ -1,4 +1,4 @@
-﻿# Copyright (c) 2011 Sam Rushing
+# Copyright (c) 2011 Sam Rushing
 """ECC secp256k1 OpenSSL wrapper.
 
 WARNING: This module does not mlock() secrets; your private keys may end up on
@@ -10,7 +10,6 @@ This file is modified from python-machinecoinlib.
 import ctypes
 import ctypes.util
 import hashlib
-import sys
 
 ssl = ctypes.cdll.LoadLibrary(ctypes.util.find_library ('ssl') or 'libeay32')
 
@@ -223,10 +222,5 @@ class CPubKey(bytes):
         return repr(self)
 
     def __repr__(self):
-        # Always have represent as b'<secret>' so test cases don't have to
-        # change for py2/3
-        if sys.version > '3':
-            return '%s(%s)' % (self.__class__.__name__, super(CPubKey, self).__repr__())
-        else:
-            return '%s(b%s)' % (self.__class__.__name__, super(CPubKey, self).__repr__())
+        return '%s(%s)' % (self.__class__.__name__, super(CPubKey, self).__repr__())
 

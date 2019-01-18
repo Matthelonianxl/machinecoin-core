@@ -1,4 +1,4 @@
-﻿Machinecoin Core
+Machinecoin Core
 =============
 
 Intro
