@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2014 The Machinecoin Core developers
+// Copyright (c) 2011-2018 The Machinecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -15,9 +15,7 @@ OpenURIDialog::OpenURIDialog(QWidget *parent) :
     ui(new Ui::OpenURIDialog)
 {
     ui->setupUi(this);
-#if QT_VERSION >= 0x040700
     ui->uriEdit->setPlaceholderText("machinecoin:");
-#endif
 }
 
 OpenURIDialog::~OpenURIDialog()

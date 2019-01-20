@@ -1,4 +1,4 @@
-# Copyright (c) 2013-2018 The Machinecoin Core developers
+# Copyright (c) 2013-2016 The Machinecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -9,29 +9,22 @@ EXTRA_LIBRARIES += qt/libmachinecoinqt.a
 QT_TS = \
   qt/locale/machinecoin_af.ts \
   qt/locale/machinecoin_af_ZA.ts \
-  qt/locale/machinecoin_am.ts \
   qt/locale/machinecoin_ar.ts \
   qt/locale/machinecoin_be_BY.ts \
   qt/locale/machinecoin_bg_BG.ts \
   qt/locale/machinecoin_bg.ts \
-  qt/locale/machinecoin_bn.ts \
-  qt/locale/machinecoin_bs.ts \
   qt/locale/machinecoin_ca_ES.ts \
   qt/locale/machinecoin_ca.ts \
   qt/locale/machinecoin_ca@valencia.ts \
-  qt/locale/machinecoin_cs_CZ.ts \
   qt/locale/machinecoin_cs.ts \
   qt/locale/machinecoin_cy.ts \
   qt/locale/machinecoin_da.ts \
-  qt/locale/machinecoin_de_DE.ts \
   qt/locale/machinecoin_de.ts \
   qt/locale/machinecoin_el_GR.ts \
   qt/locale/machinecoin_el.ts \
-  qt/locale/machinecoin_en_AU.ts \
   qt/locale/machinecoin_en_GB.ts \
   qt/locale/machinecoin_en.ts \
   qt/locale/machinecoin_eo.ts \
-  qt/locale/machinecoin_es_419.ts \
   qt/locale/machinecoin_es_AR.ts \
   qt/locale/machinecoin_es_CL.ts \
   qt/locale/machinecoin_es_CO.ts \
@@ -51,64 +44,44 @@ QT_TS = \
   qt/locale/machinecoin_fr_FR.ts \
   qt/locale/machinecoin_fr.ts \
   qt/locale/machinecoin_gl.ts \
-  qt/locale/machinecoin_he_IL.ts \
   qt/locale/machinecoin_he.ts \
   qt/locale/machinecoin_hi_IN.ts \
   qt/locale/machinecoin_hr.ts \
-  qt/locale/machinecoin_hu_HU.ts \
   qt/locale/machinecoin_hu.ts \
   qt/locale/machinecoin_id_ID.ts \
-  qt/locale/machinecoin_id.ts \
-  qt/locale/machinecoin_is.ts \
   qt/locale/machinecoin_it_IT.ts \
   qt/locale/machinecoin_it.ts \
-  qt/locale/machinecoin_ja_JP.ts \
   qt/locale/machinecoin_ja.ts \
   qt/locale/machinecoin_ka.ts \
   qt/locale/machinecoin_kk_KZ.ts \
-  qt/locale/machinecoin_km_KH.ts \
   qt/locale/machinecoin_ko_KR.ts \
-  qt/locale/machinecoin_ko.ts \
   qt/locale/machinecoin_ku_IQ.ts \
   qt/locale/machinecoin_ky.ts \
   qt/locale/machinecoin_la.ts \
   qt/locale/machinecoin_lt.ts \
   qt/locale/machinecoin_lv_LV.ts \
   qt/locale/machinecoin_mk_MK.ts \
-  qt/locale/machinecoin_ml.ts \
   qt/locale/machinecoin_mn.ts \
-  qt/locale/machinecoin_mr_IN.ts \
   qt/locale/machinecoin_ms_MY.ts \
-  qt/locale/machinecoin_ms.ts \
-  qt/locale/machinecoin_my.ts \
-  qt/locale/machinecoin_nb_NO.ts \
   qt/locale/machinecoin_nb.ts \
   qt/locale/machinecoin_ne.ts \
-  qt/locale/machinecoin_nl_NL.ts \
   qt/locale/machinecoin_nl.ts \
   qt/locale/machinecoin_pam.ts \
-  qt/locale/machinecoin_pl_PL.ts \
   qt/locale/machinecoin_pl.ts \
   qt/locale/machinecoin_pt_BR.ts \
   qt/locale/machinecoin_pt_PT.ts \
-  qt/locale/machinecoin_pt.ts \
   qt/locale/machinecoin_ro_RO.ts \
   qt/locale/machinecoin_ro.ts \
   qt/locale/machinecoin_ru_RU.ts \
   qt/locale/machinecoin_ru.ts \
-  qt/locale/machinecoin_si.ts \
   qt/locale/machinecoin_sk.ts \
   qt/locale/machinecoin_sl_SI.ts \
-  qt/locale/machinecoin_sn.ts \
   qt/locale/machinecoin_sq.ts \
   qt/locale/machinecoin_sr@latin.ts \
   qt/locale/machinecoin_sr.ts \
   qt/locale/machinecoin_sv.ts \
-  qt/locale/machinecoin_ta_IN.ts \
   qt/locale/machinecoin_ta.ts \
-  qt/locale/machinecoin_te.ts \
   qt/locale/machinecoin_th_TH.ts \
-  qt/locale/machinecoin_th.ts \
   qt/locale/machinecoin_tr_TR.ts \
   qt/locale/machinecoin_tr.ts \
   qt/locale/machinecoin_uk.ts \
@@ -117,7 +90,6 @@ QT_TS = \
   qt/locale/machinecoin_vi.ts \
   qt/locale/machinecoin_vi_VN.ts \
   qt/locale/machinecoin_zh_CN.ts \
-  qt/locale/machinecoin_zh-Hans.ts \
   qt/locale/machinecoin_zh_HK.ts \
   qt/locale/machinecoin_zh.ts \
   qt/locale/machinecoin_zh_TW.ts
@@ -313,6 +285,7 @@ RES_ICONS = \
   qt/res/icons/network_disabled.png \
   qt/res/icons/open.png \
   qt/res/icons/overview.png \
+  qt/res/icons/proxy.png \
   qt/res/icons/quit.png \
   qt/res/icons/receive.png \
   qt/res/icons/remove.png \
@@ -393,7 +366,7 @@ if ENABLE_WALLET
 MACHINECOIN_QT_CPP += $(MACHINECOIN_QT_WALLET_CPP)
 endif
 
-RES_IMAGES = 
+RES_IMAGES =
 
 RES_MOVIES = $(wildcard $(srcdir)/qt/res/movies/spinner-*.png)
 
@@ -439,7 +412,7 @@ if TARGET_WINDOWS
 endif
 qt_machinecoin_qt_LDADD = qt/libmachinecoinqt.a $(LIBMACHINECOIN_SERVER)
 if ENABLE_WALLET
-qt_machinecoin_qt_LDADD += $(LIBMACHINECOIN_WALLET)
+qt_machinecoin_qt_LDADD += $(LIBMACHINECOIN_UTIL) $(LIBMACHINECOIN_WALLET)
 endif
 if ENABLE_ZMQ
 qt_machinecoin_qt_LDADD += $(LIBMACHINECOIN_ZMQ) $(ZMQ_LIBS)
@@ -448,7 +421,7 @@ qt_machinecoin_qt_LDADD += $(LIBMACHINECOIN_CLI) $(LIBMACHINECOIN_COMMON) $(LIBM
   $(BOOST_LIBS) $(QT_LIBS) $(QT_DBUS_LIBS) $(QR_LIBS) $(PROTOBUF_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(LIBSECP256K1) \
   $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
 qt_machinecoin_qt_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
-qt_machinecoin_qt_LIBTOOLFLAGS = --tag CXX
+qt_machinecoin_qt_LIBTOOLFLAGS = $(AM_LIBTOOLFLAGS) --tag CXX
 
 #locale/foo.ts -> locale/foo.qm
 QT_QM=$(QT_TS:.ts=.qm)

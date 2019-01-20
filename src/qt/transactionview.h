@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2017 The Machinecoin Core developers
+// Copyright (c) 2011-2018 The Machinecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -6,6 +6,8 @@
 #define MACHINECOIN_QT_TRANSACTIONVIEW_H
 
 #include <qt/guiutil.h>
+
+#include <uint256.h>
 
 #include <QWidget>
 #include <QKeyEvent>
@@ -116,7 +118,7 @@ public Q_SLOTS:
     void changedSearch();
     void exportClicked();
     void focusTransaction(const QModelIndex&);
-
+    void focusTransaction(const uint256& txid);
 };
 
 #endif // MACHINECOIN_QT_TRANSACTIONVIEW_H

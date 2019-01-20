@@ -1169,28 +1169,14 @@ void CMasternodeMan::SendVerifyReply(CNode* pnode, CMasternodeVerification& mnv,
 
     std::string strError;
 
-    if (chainActive.Height() > 594000) {
-        uint256 hash = mnv.GetSignatureHash1(blockHash);
-        if(!CHashSigner::SignHash(hash, activeMasternode.keyMasternode, mnv.vchSig1)) {
-            LogPrintf("CMasternodeMan::SendVerifyReply -- SignHash() failed\n");
-            return;
-        }
-        if (!CHashSigner::VerifyHash(hash, activeMasternode.pubKeyMasternode, mnv.vchSig1, strError)) {
-            LogPrintf("CMasternodeMan::SendVerifyReply -- VerifyHash() failed, error: %s\n", strError);
-            return;
-        }
-    } else {
-        std::string strMessage = strprintf("%s%d%s", activeMasternode.service.ToString(), mnv.nonce, blockHash.ToString());
-
-        if(!CMessageSigner::SignMessage(strMessage, mnv.vchSig1, activeMasternode.keyMasternode)) {
-            LogPrintf("MasternodeMan::SendVerifyReply -- SignMessage() failed\n");
-            return;
-        }
-
-        if(!CMessageSigner::VerifyMessage(activeMasternode.pubKeyMasternode, mnv.vchSig1, strMessage, strError)) {
-            LogPrintf("MasternodeMan::SendVerifyReply -- VerifyMessage() failed, error: %s\n", strError);
-            return;
-        }
+    uint256 hash = mnv.GetSignatureHash1(blockHash);
+    if(!CHashSigner::SignHash(hash, activeMasternode.keyMasternode, mnv.vchSig1)) {
+        LogPrintf("CMasternodeMan::SendVerifyReply -- SignHash() failed\n");
+        return;
+    }
+    if (!CHashSigner::VerifyHash(hash, activeMasternode.pubKeyMasternode, mnv.vchSig1, strError)) {
+        LogPrintf("CMasternodeMan::SendVerifyReply -- VerifyHash() failed, error: %s\n", strError);
+        return;
     }
 
     const CNetMsgMaker msgMaker(pnode->GetSendVersion());
@@ -1251,13 +1237,7 @@ void CMasternodeMan::ProcessVerifyReply(CNode* pnode, CMasternodeVerification& m
         std::string strMessage1 = strprintf("%s%d%s", pnode->addr.ToString(), mnv.nonce, blockHash.ToString());
         for (auto& mnpair : mapMasternodes) {
             if(CAddress(mnpair.second.addr, NODE_NETWORK) == pnode->addr) {
-                bool fFound = false;
-                if (chainActive.Height() > 594000) {
-                    fFound = CHashSigner::VerifyHash(hash1, mnpair.second.pubKeyMasternode, mnv.vchSig1, strError);
-                    // we don't care about mnv with signature in old format
-                } else {
-                    fFound = CMessageSigner::VerifyMessage(mnpair.second.pubKeyMasternode, mnv.vchSig1, strMessage1, strError);
-                }
+                bool fFound = CHashSigner::VerifyHash(hash1, mnpair.second.pubKeyMasternode, mnv.vchSig1, strError);
                 if (fFound) {
                     // found it!
                     prealMasternode = &mnpair.second;
@@ -1276,31 +1256,16 @@ void CMasternodeMan::ProcessVerifyReply(CNode* pnode, CMasternodeVerification& m
 
                     std::string strError;
 
-                    if (chainActive.Height() > 594000) {
-                        uint256 hash2 = mnv.GetSignatureHash2(blockHash);
+                    uint256 hash2 = mnv.GetSignatureHash2(blockHash);
 
-                        if(!CHashSigner::SignHash(hash2, activeMasternode.keyMasternode, mnv.vchSig2)) {
-                            LogPrintf("MasternodeMan::ProcessVerifyReply -- SignHash() failed\n");
-                            return;
-                        }
+                    if(!CHashSigner::SignHash(hash2, activeMasternode.keyMasternode, mnv.vchSig2)) {
+                        LogPrintf("MasternodeMan::ProcessVerifyReply -- SignHash() failed\n");
+                        return;
+                    }
 
-                        if(!CHashSigner::VerifyHash(hash2, activeMasternode.pubKeyMasternode, mnv.vchSig2, strError)) {
-                            LogPrintf("MasternodeMan::ProcessVerifyReply -- VerifyHash() failed, error: %s\n", strError);
-                            return;
-                        }
-                    } else {
-                        std::string strMessage2 = strprintf("%s%d%s%s%s", mnv.addr.ToString(), mnv.nonce, blockHash.ToString(),
-                                                mnv.masternodeOutpoint1.ToStringShort(), mnv.masternodeOutpoint2.ToStringShort());
-
-                        if(!CMessageSigner::SignMessage(strMessage2, mnv.vchSig2, activeMasternode.keyMasternode)) {
-                            LogPrintf("MasternodeMan::ProcessVerifyReply -- SignMessage() failed\n");
-                            return;
-                        }
-
-                        if(!CMessageSigner::VerifyMessage(activeMasternode.pubKeyMasternode, mnv.vchSig2, strMessage2, strError)) {
-                            LogPrintf("MasternodeMan::ProcessVerifyReply -- VerifyMessage() failed, error: %s\n", strError);
-                            return;
-                        }
+                    if(!CHashSigner::VerifyHash(hash2, activeMasternode.pubKeyMasternode, mnv.vchSig2, strError)) {
+                        LogPrintf("MasternodeMan::ProcessVerifyReply -- VerifyHash() failed, error: %s\n", strError);
+                        return;
                     }
 
                     mWeAskedForVerification[pnode->addr] = mnv;
@@ -1403,33 +1368,17 @@ void CMasternodeMan::ProcessVerifyBroadcast(CNode* pnode, const CMasternodeVerif
             return;
         }
 
-        if (chainActive.Height() > 594000) {
-            uint256 hash1 = mnv.GetSignatureHash1(blockHash);
-            uint256 hash2 = mnv.GetSignatureHash2(blockHash);
+        uint256 hash1 = mnv.GetSignatureHash1(blockHash);
+        uint256 hash2 = mnv.GetSignatureHash2(blockHash);
 
-            if(!CHashSigner::VerifyHash(hash1, pmn1->pubKeyMasternode, mnv.vchSig1, strError)) {
-                LogPrintf("MasternodeMan::ProcessVerifyBroadcast -- VerifyHash() failed, error: %s\n", strError);
-                return;
-            }
+        if(!CHashSigner::VerifyHash(hash1, pmn1->pubKeyMasternode, mnv.vchSig1, strError)) {
+            LogPrintf("MasternodeMan::ProcessVerifyBroadcast -- VerifyHash() failed, error: %s\n", strError);
+            return;
+        }
 
-            if(!CHashSigner::VerifyHash(hash2, pmn2->pubKeyMasternode, mnv.vchSig2, strError)) {
-                LogPrintf("MasternodeMan::ProcessVerifyBroadcast -- VerifyHash() failed, error: %s\n", strError);
-                return;
-            }
-        } else {
-            std::string strMessage1 = strprintf("%s%d%s", mnv.addr.ToString(), mnv.nonce, blockHash.ToString());
-            std::string strMessage2 = strprintf("%s%d%s%s%s", mnv.addr.ToString(), mnv.nonce, blockHash.ToString(),
-                                    mnv.masternodeOutpoint1.ToStringShort(), mnv.masternodeOutpoint2.ToStringShort());
-
-            if(!CMessageSigner::VerifyMessage(pmn1->pubKeyMasternode, mnv.vchSig1, strMessage1, strError)) {
-                LogPrintf("CMasternodeMan::ProcessVerifyBroadcast -- VerifyMessage() for masternode1 failed, error: %s\n", strError);
-                return;
-            }
-
-            if(!CMessageSigner::VerifyMessage(pmn2->pubKeyMasternode, mnv.vchSig2, strMessage2, strError)) {
-                LogPrintf("CMasternodeMan::ProcessVerifyBroadcast -- VerifyMessage() for masternode2 failed, error: %s\n", strError);
-                return;
-            }
+        if(!CHashSigner::VerifyHash(hash2, pmn2->pubKeyMasternode, mnv.vchSig2, strError)) {
+            LogPrintf("MasternodeMan::ProcessVerifyBroadcast -- VerifyHash() failed, error: %s\n", strError);
+            return;
         }
 
         if(!pmn1->IsPoSeVerified()) {

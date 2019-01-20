@@ -53,6 +53,8 @@ namespace MCLog {
         COINDB      = (1 << 18),
         QT          = (1 << 19),
         LEVELDB     = (1 << 20),
+        MN          = (1 << 21),
+        GOV         = (1 << 22),
         ALL         = ~(uint32_t)0,
     };
 

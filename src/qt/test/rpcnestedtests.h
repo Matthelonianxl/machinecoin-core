@@ -1,9 +1,9 @@
-// Copyright (c) 2016-2017 The Machinecoin Core developers
+// Copyright (c) 2016-2018 The Machinecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef MACHINECOIN_QT_TEST_RPC_NESTED_TESTS_H
-#define MACHINECOIN_QT_TEST_RPC_NESTED_TESTS_H
+#ifndef MACHINECOIN_QT_TEST_RPCNESTEDTESTS_H
+#define MACHINECOIN_QT_TEST_RPCNESTEDTESTS_H
 
 #include <QObject>
 #include <QTest>
@@ -19,4 +19,4 @@ class RPCNestedTests : public QObject
     void rpcNestedTests();
 };
 
-#endif // MACHINECOIN_QT_TEST_RPC_NESTED_TESTS_H
+#endif // MACHINECOIN_QT_TEST_RPCNESTEDTESTS_H

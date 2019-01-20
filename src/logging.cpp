@@ -119,6 +119,8 @@ const CLogCategoryDesc LogCategories[] =
     {MCLog::COINDB, "coindb"},
     {MCLog::QT, "qt"},
     {MCLog::LEVELDB, "leveldb"},
+    {MCLog::MN, "masternode"},
+    {MCLog::GOV, "governance"},
     {MCLog::ALL, "1"},
     {MCLog::ALL, "all"},
 };

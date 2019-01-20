@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2011-2018 The Machinecoin Core developers
+// Copyright (c) 2011-2018 The Machinecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -20,6 +20,7 @@ QList<MachinecoinUnits::Unit> MachinecoinUnits::availableUnits()
     unitlist.append(MAC);
     unitlist.append(mMAC);
     unitlist.append(uMAC);
+    unitlist.append(SAT);
     return unitlist;
 }
 
@@ -30,6 +31,7 @@ bool MachinecoinUnits::valid(int unit)
     case MAC:
     case mMAC:
     case uMAC:
+    case SAT:
         return true;
     default:
         return false;
@@ -42,7 +44,8 @@ QString MachinecoinUnits::longName(int unit)
     {
     case MAC: return QString("MAC");
     case mMAC: return QString("mMAC");
-    case uMAC: return QString::fromUtf8("µMAC");
+    case uMAC: return QString::fromUtf8("µMAC (bits)");
+    case SAT: return QString("Satoshi (sat)");
     default: return QString("???");
     }
 }
@@ -52,7 +55,8 @@ QString MachinecoinUnits::shortName(int unit)
     switch(unit)
     {
     case uMAC: return QString::fromUtf8("bits");
-    default:   return longName(unit);
+    case SAT: return QString("sat");
+    default: return longName(unit);
     }
 }
 
@@ -62,7 +66,8 @@ QString MachinecoinUnits::description(int unit)
     {
     case MAC: return QString("Machinecoins");
     case mMAC: return QString("Milli-Machinecoins (1 / 1" THIN_SP_UTF8 "000)");
-    case uMAC: return QString("Micro-Machinecoins (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+    case uMAC: return QString("Micro-Machinecoins (bits) (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+    case SAT: return QString("Satoshi (sat) (1 / 100" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
     default: return QString("???");
     }
 }
@@ -71,10 +76,11 @@ qint64 MachinecoinUnits::factor(int unit)
 {
     switch(unit)
     {
-    case MAC:  return 100000000;
+    case MAC: return 100000000;
     case mMAC: return 100000;
     case uMAC: return 100;
-    default:   return 100000000;
+    case SAT: return 1;
+    default: return 100000000;
     }
 }
 
@@ -85,6 +91,7 @@ int MachinecoinUnits::decimals(int unit)
     case MAC: return 8;
     case mMAC: return 5;
     case uMAC: return 2;
+    case SAT: return 0;
     default: return 0;
     }
 }
@@ -100,9 +107,7 @@ QString MachinecoinUnits::format(int unit, const CAmount& nIn, bool fPlus, Separ
     int num_decimals = decimals(unit);
     qint64 n_abs = (n > 0 ? n : -n);
     qint64 quotient = n_abs / coin;
-    qint64 remainder = n_abs % coin;
     QString quotient_str = QString::number(quotient);
-    QString remainder_str = QString::number(remainder).rightJustified(num_decimals, '0');
 
     // Use SI-style thin space separators as these are locale independent and can't be
     // confused with the decimal marker.
@@ -116,7 +121,14 @@ QString MachinecoinUnits::format(int unit, const CAmount& nIn, bool fPlus, Separ
         quotient_str.insert(0, '-');
     else if (fPlus && n > 0)
         quotient_str.insert(0, '+');
-    return quotient_str + QString(".") + remainder_str;
+
+    if (num_decimals > 0) {
+        qint64 remainder = n_abs % coin;
+        QString remainder_str = QString::number(remainder).rightJustified(num_decimals, '0');
+        return quotient_str + QString(".") + remainder_str;
+    } else {
+        return quotient_str;
+    }
 }
 
 

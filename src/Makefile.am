@@ -1,12 +1,13 @@
-# Copyright (c) 2013-2018 The Machinecoin Core developers
+# Copyright (c) 2013-2016 The Machinecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 DIST_SUBDIRS = secp256k1 univalue
 
-AM_LDFLAGS = $(PTHREAD_CFLAGS) $(LIBTOOL_LDFLAGS) $(HARDENED_LDFLAGS)
-AM_CXXFLAGS = $(HARDENED_CXXFLAGS) $(ERROR_CXXFLAGS)
-AM_CPPFLAGS = $(HARDENED_CPPFLAGS)
+AM_LDFLAGS = $(PTHREAD_CFLAGS) $(LIBTOOL_LDFLAGS) $(HARDENED_LDFLAGS) $(GPROF_LDFLAGS) $(SANITIZER_LDFLAGS)
+AM_CXXFLAGS = $(DEBUG_CXXFLAGS) $(HARDENED_CXXFLAGS) $(WARN_CXXFLAGS) $(NOWARN_CXXFLAGS) $(ERROR_CXXFLAGS) $(GPROF_CXXFLAGS) $(SANITIZER_CXXFLAGS)
+AM_CPPFLAGS = $(DEBUG_CPPFLAGS) $(HARDENED_CPPFLAGS)
+AM_LIBTOOLFLAGS = --preserve-dup-deps
 EXTRA_LIBRARIES =
 
 if EMBEDDED_UNIVALUE
@@ -28,7 +29,7 @@ LIBMACHINECOIN_COMMON=libmachinecoin_common.a
 LIBMACHINECOIN_CONSENSUS=libmachinecoin_consensus.a
 LIBMACHINECOIN_CLI=libmachinecoin_cli.a
 LIBMACHINECOIN_UTIL=libmachinecoin_util.a
-LIBMACHINECOIN_CRYPTO=crypto/libmachinecoin_crypto.a
+LIBMACHINECOIN_CRYPTO_BASE=crypto/libmachinecoin_crypto_base.a
 LIBMACHINECOINQT=qt/libmachinecoinqt.a
 LIBSECP256K1=secp256k1/libsecp256k1.la
 
@@ -42,7 +43,21 @@ if ENABLE_WALLET
 LIBMACHINECOIN_WALLET=libmachinecoin_wallet.a
 endif
 
-$(LIBSECP256K1): $(wildcard secp256k1/src/*) $(wildcard secp256k1/include/*)
+LIBMACHINECOIN_CRYPTO= $(LIBMACHINECOIN_CRYPTO_BASE)
+if ENABLE_SSE41
+LIBMACHINECOIN_CRYPTO_SSE41 = crypto/libmachinecoin_crypto_sse41.a
+LIBMACHINECOIN_CRYPTO += $(LIBMACHINECOIN_CRYPTO_SSE41)
+endif
+if ENABLE_AVX2
+LIBMACHINECOIN_CRYPTO_AVX2 = crypto/libmachinecoin_crypto_avx2.a
+LIBMACHINECOIN_CRYPTO += $(LIBMACHINECOIN_CRYPTO_AVX2)
+endif
+if ENABLE_SHANI
+LIBMACHINECOIN_CRYPTO_SHANI = crypto/libmachinecoin_crypto_shani.a
+LIBMACHINECOIN_CRYPTO += $(LIBMACHINECOIN_CRYPTO_SHANI)
+endif
+
+$(LIBSECP256K1): $(wildcard secp256k1/src/*.h) $(wildcard secp256k1/src/*.c) $(wildcard secp256k1/include/*)
 	$(AM_V_at)$(MAKE) $(AM_MAKEFLAGS) -C $(@D) $(@F)
 
 # Make is not made aware of per-object dependencies to avoid limiting building parallelization
@@ -113,12 +128,19 @@ MACHINECOIN_CORE_H = \
   flat-database.h \
   httprpc.h \
   httpserver.h \
+  index/base.h \
+  index/txindex.h \
   indirectmap.h \
   init.h \
+  interfaces/handler.h \
+  interfaces/node.h \
+  interfaces/wallet.h \
   key.h \
+  key_io.h \
   keystore.h \
   dbwrapper.h \
   limitedmap.h \
+  logging.h \
   masternode.h \
   masternode-payments.h \
   masternode-sync.h \
@@ -126,7 +148,6 @@ MACHINECOIN_CORE_H = \
   masternodeconfig.h \
   memusage.h \
   merkleblock.h \
-  messagesigner.h \
   miner.h \
   net.h \
   net_processing.h \
@@ -135,6 +156,7 @@ MACHINECOIN_CORE_H = \
   netfulfilledman.h \
   netmessagemaker.h \
   noui.h \
+  outputtype.h \
   policy/feerate.h \
   policy/fees.h \
   policy/policy.h \
@@ -148,15 +170,17 @@ MACHINECOIN_CORE_H = \
   rpc/client.h \
   rpc/mining.h \
   rpc/protocol.h \
-  rpc/safemode.h \
   rpc/server.h \
+  rpc/rawtransaction.h \
   rpc/register.h \
   rpc/util.h \
   scheduler.h \
+  script/descriptor.h \
+  script/ismine.h \
   script/sigcache.h \
   script/sign.h \
   script/standard.h \
-  script/ismine.h \
+  shutdown.h \
   streams.h \
   support/allocators/secure.h \
   support/allocators/zeroafterfree.h \
@@ -173,27 +197,29 @@ MACHINECOIN_CORE_H = \
   ui_interface.h \
   undo.h \
   util.h \
+  utilmemory.h \
   utilmoneystr.h \
   utiltime.h \
   validation.h \
   validationinterface.h \
   versionbits.h \
+  walletinitinterface.h \
   wallet/coincontrol.h \
   wallet/crypter.h \
   wallet/db.h \
   wallet/feebumper.h \
   wallet/fees.h \
-  wallet/init.h \
   wallet/rpcwallet.h \
   wallet/wallet.h \
   wallet/walletdb.h \
   wallet/walletutil.h \
+  wallet/coinselection.h \
   warnings.h \
   zmq/zmqabstractnotifier.h \
   zmq/zmqconfig.h\
   zmq/zmqnotificationinterface.h \
   zmq/zmqpublishnotifier.h \
-  crypto/scrypt.h \
+  zmq/zmqrpc.h
   $(MACHINECOIN_TIMETRAVEL_H)
 
 
@@ -217,6 +243,8 @@ libmachinecoin_server_a_SOURCES = \
   consensus/tx_verify.cpp \
   httprpc.cpp \
   httpserver.cpp \
+  index/base.cpp \
+  index/txindex.cpp \
   init.cpp \
   dbwrapper.cpp \
   governance.cpp \
@@ -231,12 +259,12 @@ libmachinecoin_server_a_SOURCES = \
   masternodeconfig.cpp \
   masternodeman.cpp \
   merkleblock.cpp \
-  messagesigner.cpp \
   miner.cpp \
   net.cpp \
   netfulfilledman.cpp \
   net_processing.cpp \
   noui.cpp \
+  outputtype.cpp \
   policy/fees.cpp \
   policy/policy.cpp \
   policy/rbf.cpp \
@@ -249,10 +277,10 @@ libmachinecoin_server_a_SOURCES = \
   rpc/misc.cpp \
   rpc/net.cpp \
   rpc/rawtransaction.cpp \
-  rpc/safemode.cpp \
   rpc/server.cpp \
+  rpc/util.cpp \
   script/sigcache.cpp \
-  script/ismine.cpp \
+  shutdown.cpp \
   timedata.cpp \
   torcontrol.cpp \
   txdb.cpp \
@@ -269,7 +297,8 @@ libmachinecoin_zmq_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 libmachinecoin_zmq_a_SOURCES = \
   zmq/zmqabstractnotifier.cpp \
   zmq/zmqnotificationinterface.cpp \
-  zmq/zmqpublishnotifier.cpp
+  zmq/zmqpublishnotifier.cpp \
+  zmq/zmqrpc.cpp
 endif
 
 
@@ -278,8 +307,8 @@ endif
 libmachinecoin_wallet_a_CPPFLAGS = $(AM_CPPFLAGS) $(MACHINECOIN_INCLUDES)
 libmachinecoin_wallet_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 libmachinecoin_wallet_a_SOURCES = \
-  rpc/misc.cpp \
-  script/ismine.cpp \
+  interfaces/wallet.cpp \
+  wallet/coincontrol.cpp \
   wallet/crypter.cpp \
   wallet/db.cpp \
   wallet/feebumper.cpp \
@@ -290,6 +319,7 @@ libmachinecoin_wallet_a_SOURCES = \
   wallet/wallet.cpp \
   wallet/walletdb.cpp \
   wallet/walletutil.cpp \
+  wallet/coinselection.cpp \
   $(MACHINECOIN_CORE_H)
 
 # timetravel related libraries
@@ -323,9 +353,9 @@ MACHINECOIN_TIMETRAVEL_H = \
   crypto/hashblock.h
 
 # crypto primitives library
-crypto_libmachinecoin_crypto_a_CPPFLAGS = $(AM_CPPFLAGS) $(SSL_CFLAGS)
-crypto_libmachinecoin_crypto_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-crypto_libmachinecoin_crypto_a_SOURCES = \
+crypto_libmachinecoin_crypto_base_a_CPPFLAGS = $(AM_CPPFLAGS)
+crypto_libmachinecoin_crypto_base_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+crypto_libmachinecoin_crypto_base_a_SOURCES = \
   crypto/aes.cpp \
   crypto/aes.h \
   crypto/chacha20.h \
@@ -345,8 +375,26 @@ crypto_libmachinecoin_crypto_a_SOURCES = \
   crypto/sha512.h
 
 if USE_ASM
-crypto_libmachinecoin_crypto_a_SOURCES += crypto/sha256_sse4.cpp
+crypto_libmachinecoin_crypto_base_a_SOURCES += crypto/sha256_sse4.cpp
 endif
+
+crypto_libmachinecoin_crypto_sse41_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+crypto_libmachinecoin_crypto_sse41_a_CPPFLAGS = $(AM_CPPFLAGS)
+crypto_libmachinecoin_crypto_sse41_a_CXXFLAGS += $(SSE41_CXXFLAGS)
+crypto_libmachinecoin_crypto_sse41_a_CPPFLAGS += -DENABLE_SSE41
+crypto_libmachinecoin_crypto_sse41_a_SOURCES = crypto/sha256_sse41.cpp
+
+crypto_libmachinecoin_crypto_avx2_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+crypto_libmachinecoin_crypto_avx2_a_CPPFLAGS = $(AM_CPPFLAGS)
+crypto_libmachinecoin_crypto_avx2_a_CXXFLAGS += $(AVX2_CXXFLAGS)
+crypto_libmachinecoin_crypto_avx2_a_CPPFLAGS += -DENABLE_AVX2
+crypto_libmachinecoin_crypto_avx2_a_SOURCES = crypto/sha256_avx2.cpp
+
+crypto_libmachinecoin_crypto_shani_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+crypto_libmachinecoin_crypto_shani_a_CPPFLAGS = $(AM_CPPFLAGS)
+crypto_libmachinecoin_crypto_shani_a_CXXFLAGS += $(SHANI_CXXFLAGS)
+crypto_libmachinecoin_crypto_shani_a_CPPFLAGS += -DENABLE_SHANI
+crypto_libmachinecoin_crypto_shani_a_SOURCES = crypto/sha256_shani.cpp
 
 # consensus: shared between all executables that validate any consensus rules.
 libmachinecoin_consensus_a_CPPFLAGS = $(AM_CPPFLAGS) $(MACHINECOIN_INCLUDES)
@@ -376,17 +424,13 @@ libmachinecoin_consensus_a_SOURCES = \
   script/script_error.cpp \
   script/script_error.h \
   serialize.h \
+  span.h \
   tinyformat.h \
   uint256.cpp \
   uint256.h \
   utilstrencodings.cpp \
   utilstrencodings.h \
-  version.h \
-  crypto/scrypt.cpp \
-  crypto/scrypt-sse2.cpp \
-  crypto/scrypt.h \
-  $(MACHINECOIN_TIMETRAVEL) \
-  $(MACHINECOIN_TIMETRAVEL_H)
+  version.h
 
 # common: shared between machinecoind, and machinecoin-qt and non-server tools
 libmachinecoin_common_a_CPPFLAGS = $(AM_CPPFLAGS) $(MACHINECOIN_INCLUDES)
@@ -399,15 +443,16 @@ libmachinecoin_common_a_SOURCES = \
   compressor.cpp \
   core_read.cpp \
   core_write.cpp \
-  crypto/scrypt.cpp \
-  $(MACHINECOIN_TIMETRAVEL) \
   key.cpp \
+  key_io.cpp \
   keystore.cpp \
   netaddress.cpp \
   netbase.cpp \
   policy/feerate.cpp \
   protocol.cpp \
   scheduler.cpp \
+  script/descriptor.cpp \
+  script/ismine.cpp \
   script/sign.cpp \
   script/standard.cpp \
   warnings.cpp \
@@ -426,9 +471,11 @@ libmachinecoin_util_a_SOURCES = \
   compat/glibcxx_sanity.cpp \
   compat/strnlen.cpp \
   fs.cpp \
+  interfaces/handler.cpp \
+  interfaces/node.cpp \
+  logging.cpp \
   random.cpp \
   rpc/protocol.cpp \
-  rpc/util.cpp \
   support/cleanse.cpp \
   sync.cpp \
   threadinterrupt.cpp \
@@ -440,6 +487,7 @@ libmachinecoin_util_a_SOURCES = \
 
 if GLIBC_BACK_COMPAT
 libmachinecoin_util_a_SOURCES += compat/glibc_compat.cpp
+AM_LDFLAGS += $(COMPAT_LDFLAGS)
 endif
 
 # cli: shared between machinecoin-cli and machinecoin-qt
@@ -464,10 +512,10 @@ endif
 
 machinecoind_LDADD = \
   $(LIBMACHINECOIN_SERVER) \
+  $(LIBMACHINECOIN_WALLET) \
   $(LIBMACHINECOIN_COMMON) \
   $(LIBUNIVALUE) \
   $(LIBMACHINECOIN_UTIL) \
-  $(LIBMACHINECOIN_WALLET) \
   $(LIBMACHINECOIN_ZMQ) \
   $(LIBMACHINECOIN_CONSENSUS) \
   $(LIBMACHINECOIN_CRYPTO) \
@@ -522,15 +570,15 @@ machinecoin_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
 # machinecoinconsensus library #
 if BUILD_MACHINECOIN_LIBS
 include_HEADERS = script/machinecoinconsensus.h
-libmachinecoinconsensus_la_SOURCES = $(crypto_libmachinecoin_crypto_a_SOURCES) $(libmachinecoin_consensus_a_SOURCES)
+libmachinecoinconsensus_la_SOURCES = $(crypto_libmachinecoin_crypto_base_a_SOURCES) $(libmachinecoin_consensus_a_SOURCES)
 
 if GLIBC_BACK_COMPAT
   libmachinecoinconsensus_la_SOURCES += compat/glibc_compat.cpp
 endif
 
 libmachinecoinconsensus_la_LDFLAGS = $(AM_LDFLAGS) -no-undefined $(RELDFLAGS)
-libmachinecoinconsensus_la_LIBADD = $(LIBSECP256K1) $(CRYPTO_LIBS) $(BOOST_LIBS)
-libmachinecoinconsensus_la_CPPFLAGS = $(AM_CPPFLAGS) -I$(builddir)/obj -I$(srcdir)/secp256k1/include -DBUILD_MACHINECOIN_INTERNAL $(SSL_CFLAGS)
+libmachinecoinconsensus_la_LIBADD = $(LIBSECP256K1)
+libmachinecoinconsensus_la_CPPFLAGS = $(AM_CPPFLAGS) -I$(builddir)/obj -I$(srcdir)/secp256k1/include -DBUILD_MACHINECOIN_INTERNAL
 libmachinecoinconsensus_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 
 endif

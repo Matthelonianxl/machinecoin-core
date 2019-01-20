@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2015 The Machinecoin Core developers
+// Copyright (c) 2011-2018 The Machinecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -24,7 +24,7 @@ void CoinControlTreeWidget::keyPressEvent(QKeyEvent *event)
     else if (event->key() == Qt::Key_Escape) // press esc -> close dialog
     {
         event->ignore();
-        CoinControlDialog *coinControlDialog = (CoinControlDialog*)this->parentWidget();
+        CoinControlDialog *coinControlDialog = static_cast<CoinControlDialog*>(this->parentWidget());
         coinControlDialog->done(QDialog::Accepted);
     }
     else

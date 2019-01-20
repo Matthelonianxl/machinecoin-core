@@ -383,33 +383,17 @@ uint256 CMasternodePaymentVote::GetSignatureHash() const
 bool CMasternodePaymentVote::Sign()
 {
     std::string strError;
-    
-    if (chainActive.Height() > 594000) {
-        uint256 hash = GetSignatureHash();
 
-        if(!CHashSigner::SignHash(hash, activeMasternode.keyMasternode, vchSig)) {
-            LogPrintf("CMasternodePaymentVote::Sign -- SignHash() failed\n");
-            return false;
-        }
+    uint256 hash = GetSignatureHash();
 
-        if (!CHashSigner::VerifyHash(hash, activeMasternode.pubKeyMasternode, vchSig, strError)) {
-            LogPrintf("CMasternodePaymentVote::Sign -- VerifyHash() failed, error: %s\n", strError);
-            return false;
-        }
-    } else {
-        std::string strMessage = masternodeOutpoint.ToStringShort() +
-                    boost::lexical_cast<std::string>(nBlockHeight) +
-                    ScriptToAsmStr(payee);
+    if(!CHashSigner::SignHash(hash, activeMasternode.keyMasternode, vchSig)) {
+        LogPrintf("CMasternodePaymentVote::Sign -- SignHash() failed\n");
+        return false;
+    }
 
-        if(!CMessageSigner::SignMessage(strMessage, vchSig, activeMasternode.keyMasternode)) {
-            LogPrintf("CMasternodePaymentVote::Sign -- SignMessage() failed\n");
-            return false;
-        }
-
-        if(!CMessageSigner::VerifyMessage(activeMasternode.pubKeyMasternode, vchSig, strMessage, strError)) {
-            LogPrintf("CMasternodePaymentVote::Sign -- VerifyMessage() failed, error: %s\n", strError);
-            return false;
-        }
+    if (!CHashSigner::VerifyHash(hash, activeMasternode.pubKeyMasternode, vchSig, strError)) {
+        LogPrintf("CMasternodePaymentVote::Sign -- VerifyHash() failed, error: %s\n", strError);
+        return false;
     }
 
     return true;

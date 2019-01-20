@@ -636,30 +636,14 @@ bool CMasternodeBroadcast::Sign(const CKey& keyCollateralAddress)
 
     sigTime = GetAdjustedTime();
 
-    if (chainActive.Height() > 600000) {
-        uint256 hash = GetSignatureHash();
-        if (!CHashSigner::SignHash(hash, keyCollateralAddress, vchSig)) {
-            LogPrintf("CMasternodeBroadcast::Sign -- SignHash() failed\n");
-            return false;
-        }
-        if (!CHashSigner::VerifyHash(hash, pubKeyCollateralAddress, vchSig, strError)) {
-            LogPrintf("CMasternodeBroadcast::Sign -- VerifyMessage() failed, error: %s\n", strError);
-            return false;
-        }
-    } else {
-        std::string strMessage = addr.ToString() + boost::lexical_cast<std::string>(sigTime) +
-                        pubKeyCollateralAddress.GetID().ToString() + pubKeyMasternode.GetID().ToString() +
-                        boost::lexical_cast<std::string>(nProtocolVersion);
-
-        if (!CMessageSigner::SignMessage(strMessage, vchSig, keyCollateralAddress)) {
-            LogPrintf("CMasternodeBroadcast::Sign -- SignMessage() failed\n");
-            return false;
-        }
-
-        if (!CMessageSigner::VerifyMessage(pubKeyCollateralAddress, vchSig, strMessage, strError)) {
-            LogPrintf("CMasternodeBroadcast::Sign -- VerifyMessage() failed, error: %s\n", strError);
-            return false;
-        }
+    uint256 hash = GetSignatureHash();
+    if (!CHashSigner::SignHash(hash, keyCollateralAddress, vchSig)) {
+        LogPrintf("CMasternodeBroadcast::Sign -- SignHash() failed\n");
+        return false;
+    }
+    if (!CHashSigner::VerifyHash(hash, pubKeyCollateralAddress, vchSig, strError)) {
+        LogPrintf("CMasternodeBroadcast::Sign -- VerifyMessage() failed, error: %s\n", strError);
+        return false;
     }
 
     return true;
