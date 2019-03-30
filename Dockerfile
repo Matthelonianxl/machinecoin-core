@@ -12,6 +12,7 @@ RUN apt-get install -y libdb4.8-dev libdb4.8++-dev
 RUN apt-get install -y git
 
 WORKDIR /opt
+RUN rm -rf machinecoin-core
 RUN git clone https://github.com/machinecoin-project/machinecoin-core -b master
 
 WORKDIR /opt/machinecoin-core
