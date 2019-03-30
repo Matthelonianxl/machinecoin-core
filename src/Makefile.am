@@ -219,7 +219,7 @@ MACHINECOIN_CORE_H = \
   zmq/zmqconfig.h\
   zmq/zmqnotificationinterface.h \
   zmq/zmqpublishnotifier.h \
-  zmq/zmqrpc.h
+  zmq/zmqrpc.h \
   $(MACHINECOIN_TIMETRAVEL_H)
 
 
